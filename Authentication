@@ -18,15 +18,13 @@ public class Authentication extends User implements Comparable<User>{
 		int result;
 		for(User u: addressBookusers){
 			if(u.compareTo(scam) == 0){
+			result=  0;
 			
-				return 0
-	
-			}
-				return 0;
 			} else {
-				return 1;
+				result = 1;
 			}
 		}
+		return result;
 		
 	}
 
@@ -74,12 +72,33 @@ public class Authentication extends User implements Comparable<User>{
 		System.out.println("|                                                                                                     |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("_____________________________________________________________________________________________________");
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Username:");
-		userN = sc.nextLine();
-		System.out.println("Password:");
-		passW = sc.nextLine();
+		
+		int numtries=3;
+		while(numtries!=0) 
+		{
+		
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Username:");
+			userN = sc.nextLine();
+			System.out.println("Password:");
+			passW = sc.nextLine();
+		
+			Authentication try = new Authentication(userN, passW);
+		
+			if(try.check() == 0)
+			{
+				numtries = 0;
+				//Launch addressbook app
+				
+			} else
+			{
+				System.out.println("Username or password is incorrect, you have two more tries");
+				numtries--1;
+			}
+	
+		}
+		System.out.println("You have exceeded your number of tries, Goodbye");
+		System.exit(0);
 
 	}
 
