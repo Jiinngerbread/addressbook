@@ -20,11 +20,21 @@ public class User
 		this.passWord = pWord;
 		this.addBookUsername = aBookUser;
 	}
-
+	
 	public User(String aBookUser, String pWord)
 	{
 		this.passWord = pWord;
 		this.addBookUsername = aBookUser;	
+	}
+	
+	public String getUname()
+	{
+		return this.addBookUsername;
+	}
+	
+	public String getPword()
+	{
+		return this.passWord;
 	}
 
 	public String toString()
