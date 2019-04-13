@@ -1,19 +1,18 @@
 public class ContactList extends Contact
 {
   
-   ArrayList <Contact> ContactList
+   private ArrayList <Contact> ContactList = new ArrayList<Contact>();
     
     
-    
-    
-    public PasswordFileManager(String filename)
+    public ContactFileManager(String filename)
 	  {
 		try 
 		{	
-			FileReader fr = new FileReader("password.txt");
+			FileReader fr = new FileReader("contactlist.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String oneLine = "";
 			while ((oneLine = br.readLine()) != null)
+			{
   
 
 
