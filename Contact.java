@@ -1,4 +1,4 @@
-package contact;
+//package contact;
 
 import java.util.*;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.Period;
 
 /**
 * This class manages the details of a contact.
-* @author Jheanel Brown
+* @author Jheanel Brown and Esther E
 * @version 1.0
 */
 public class Contact extends Person
