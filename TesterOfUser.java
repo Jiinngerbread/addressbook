@@ -11,7 +11,8 @@ public class TesterOfUser
   	System.out.println("This is the last name of the user: " + user1.getUserLastname());
   	System.out.println("This is the username of the user: " + user1.getUsername());
   	System.out.println("This is the password of the user in byte code: " + user1.getpassword());
-  	String s = new String(user1.getpassword());
+  	//String s = new String(user1.getpassword());
+    String s = new String(String.valueOf(user1.getpassword()));
   	System.out.println("This is the password of the user from byte code to string: " + s);
 
   	
@@ -21,7 +22,8 @@ public class TesterOfUser
   	System.out.println("This is the last name of the user: " + user2.getUserLastname());
   	System.out.println("This is the username of the user: " + user2.getUsername());
   	System.out.println("This is the password of the user in byte code: " + user2.getpassword());
-  	String ns = new String(user2.getpassword());
+  	//String ns = new String(user2.getpassword());
+    String ns = new String(String.valueOf(user2.getpassword()));
   	System.out.println("This is the password of the user from byte code to string: " + ns);
 
   }
