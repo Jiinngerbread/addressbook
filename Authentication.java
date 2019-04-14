@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Authentication extends User implements Comparable<User>{
 	//private String checkUser;
@@ -68,7 +69,7 @@ public class Authentication extends User implements Comparable<User>{
 		return result;
 	}
 
-	public boolean securityCheck(User checkUser)
+	public static boolean securityCheck(User checkUser)
 	{
 		for(User u: addressBookusers)
 		{
