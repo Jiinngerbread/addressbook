@@ -16,9 +16,10 @@ public class PasswordManager
             byte[] salt = new byte[8];
             realRandom.nextBytes(salt);
         
-            return salt; 
-             
-        } catch(NoSuchAlgorithmException nsae) 
+            return salt;     
+        } 
+
+        catch(NoSuchAlgorithmException nsaEx) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return null;
@@ -36,11 +37,17 @@ public class PasswordManager
         
         try 
         {
-
             SecretKeyFactory secretKey = SecretKeyFactory.getInstance(algorithm);
             return secretKey.generateSecret(spec).getEncoded();
-        
-        } catch(NoSuchAlgorithmException | InvalidKeySpecException ex) 
+        }
+
+        catch(NoSuchAlgorithmException  nSAex) 
+        {
+            System.err.println("Exception occured in getEncryptedPassword()");
+            return null;
+        }
+
+        catch(InvalidKeySpecException iKex) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return null;
@@ -53,11 +60,18 @@ public class PasswordManager
         {
             byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt);
             return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);   
-        
-        }catch(NoSuchAlgorithmException | InvalidKeySpecException e) 
+        }
+
+        catch(NoSuchAlgorithmException e) 
         {
             System.err.println("Exception occured in authenticationCheck()");
             return false;
+        }
+
+        catch(InvalidKeySpecException ikeyEx) 
+        {
+            System.err.println("Exception occured in getEncryptedPassword()");
+            return null;
         }
     }
 }
