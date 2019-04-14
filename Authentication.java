@@ -110,7 +110,7 @@ public class Authentication extends User implements Comparable<User>{
 			System.out.println("Password:");
 			String passW = sc.nextLine();
 		
-			Authentication test = new User(userN, passW);
+			Authentication test = new Authentication(userN, passW);
 			test.getPasswordFromFile();
 		
 			if(securityCheck(test) == true)
