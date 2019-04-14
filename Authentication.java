@@ -67,12 +67,12 @@ public class Authentication extends User implements Comparable<User>{
 		{
 			if(u.compareTo(checkUser)== 0)
 			{
-				return true
+				return true;
 			}
 			else
 			{
 				System.out.println("Incorrect username and password combination");
-				return false
+				return false;
 			}
 		}
 	}
