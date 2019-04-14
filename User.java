@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
 * This class manages the details of an Addressbook User.
-* @author Jheanel Brown
+* @author Jheanel Brown && Esther E
 * @version 1.0
 */
 public class User extends Person 
