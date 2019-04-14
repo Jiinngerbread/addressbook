@@ -23,10 +23,10 @@ public class TesterOfUser
   	//String s = new String(user1.getpassword());
     String s = new String(String.valueOf(user1.getpassword()));
   	System.out.println("This is the password of the user from byte code to string: " + s);
-    boolean result = authenticationCheck("Pencil12Case", user1.getpassword(), user1.getUniqueSalt());
+    boolean result = authenticationCheck("Pencil12Case", user1.getpassword(), user1.getSalt());
   	System.out.println("This is the result when the password is the same : " + result);
     System.out.println();
-    boolean result1 = authenticationCheck("Pencil13Case", user1.getpassword(), user1.getUniqueSalt());
+    boolean result1 = authenticationCheck("Pencil13Case", user1.getpassword(), user1.getSalt());
     System.out.println("This is the result when the password is different : " + result1);
 
 
