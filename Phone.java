@@ -1,4 +1,4 @@
-package contact;
+//package contact;
 
 /**
 * This class manages the details of a phone.
