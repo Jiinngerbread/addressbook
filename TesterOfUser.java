@@ -11,7 +11,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class TesterOfUser
 {
-  public static void main(String [] args)
+  public static void main(String [] args) throws NoSuchAlgorithmException
   {
   	User user1 = new User("Jheanel", "Brown", Gender.FEMALE, 19940312, "Jinn", "Pencil12Case");
   	System.out.println("This is the name of the user: " + user1.getName());
