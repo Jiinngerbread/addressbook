@@ -106,9 +106,9 @@ public class Authentication extends User implements Comparable<User>{
 		
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Username:");
-			userN = sc.nextLine();
+			String userN = sc.nextLine();
 			System.out.println("Password:");
-			passW = sc.nextLine();
+			String passW = sc.nextLine();
 		
 			Authentication test = new User(userN, passW);
 			test.getPasswordFromFile();
