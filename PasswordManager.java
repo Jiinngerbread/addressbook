@@ -10,20 +10,20 @@ public class PasswordManager
 {
     public byte[] generateSalt() 
     {
-        try
-        {
+        //try
+        //{
             SecureRandom realRandom = SecureRandom.getInstance("SHA1PRNG");
             byte[] salt = new byte[8];
             realRandom.nextBytes(salt);
         
             return salt;     
-        } 
+        //} 
 
-        catch(NoSuchAlgorithmException nsaEx) 
+        /*catch(NoSuchAlgorithmException nsaEx) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return null;
-        }
+        }*/
     }
 
     public byte[] getEncryptedPassword(String passWord, byte[] salt) //throws NoSuchAlgorithmException, InvalidKeySpecException 
@@ -35,13 +35,13 @@ public class PasswordManager
         
         KeySpec spec = new PBEKeySpec(passWord.toCharArray(), salt, iterations, derivedKeyLength);
         
-        try 
-        {
+        //try 
+        //{
             SecretKeyFactory secretKey = SecretKeyFactory.getInstance(algorithm);
             return secretKey.generateSecret(spec).getEncoded();
-        }
+        //}
 
-        catch(NoSuchAlgorithmException  nSAex) 
+        /*catch(NoSuchAlgorithmException  nSAex) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return null;
@@ -51,18 +51,18 @@ public class PasswordManager
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return null;
-        }
+        }*/
     }
 
     public boolean authenticationCheck(String attemptedPassword, byte[] encryptedPassword, byte[] salt) //throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
-        try 
-        {
+        //try 
+        //{
             byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt);
             return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);   
-        }
+        //}
 
-        catch(NoSuchAlgorithmException e) 
+        /*catch(NoSuchAlgorithmException e) 
         {
             System.err.println("Exception occured in authenticationCheck()");
             return false;
@@ -72,6 +72,6 @@ public class PasswordManager
         {
             System.err.println("Exception occured in getEncryptedPassword()");
             return false;
-        }
+        }*/
     }
 }
