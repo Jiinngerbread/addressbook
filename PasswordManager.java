@@ -26,15 +26,36 @@ public class PasswordManager
         
         KeySpec spec = new PBEKeySpec(passWord.toCharArray(), salt, iterations, derivedKeyLength);
         
-        SecretKeyFactory secretKey = SecretKeyFactory.getInstance(algorithm);
- 
-        return secretKey.generateSecret(spec).getEncoded();
+        try 
+        {
+
+            SecretKeyFactory secretKey = SecretKeyFactory.getInstance(algorithm);
+            return secretKey.generateSecret(spec).getEncoded();
+        
+        } catch(NoSuchAlgorithmException | InvalidKeySpecException ex) 
+        {
+            System.err.println("Exception occured in getEncryptedPassword()");
+            return ;
+        } finally 
+        {
+            spec.clearPassword();
+        }
     }
 
     public boolean authenticationCheck(String attemptedPassword, byte[] encryptedPassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
-        byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt);
-     
-        return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);   
+        try 
+        {
+            byte[] encryptedAttemptedPassword = getEncryptedPassword(attemptedPassword, salt);
+            return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);   
+        
+        }catch(NoSuchAlgorithmException | InvalidKeySpecException e) 
+        {
+            System.err.println("Exception occured in authenticationCheck()");
+            return ;
+        } finally 
+        {
+            spec.clearPassword();
+        }
     }
 }
