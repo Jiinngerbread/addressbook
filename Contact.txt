@@ -1,0 +1,1 @@
+entryNum\alias\jheanel,brown,GENDER.FEMALE,02121994\50 Sunrise Drive;Kingston 19;;;Jamaica\phonenumber1,phonenumber2\email1,email2,email3
