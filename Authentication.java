@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Authentication extends User implements Comparable<User>{
-	private String checkUser;
+	//private String checkUser;
 	private ArrayList<String> addressBookusers = new ArrayList<String>();
 	private String[] eachLine;
 
@@ -17,7 +17,7 @@ public class Authentication extends User implements Comparable<User>{
 	public Authentication(String userName, String pWord)
 	{
 		super(userName, pWord);
-		Authentication(this.checkUser) =new User(userName, pWord);
+		Authentication checkUser =new User(userName, pWord);
 	}
 
 	public void getPasswordFromFile()
