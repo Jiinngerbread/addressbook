@@ -6,39 +6,55 @@ import java.util.*;
 * @author Jheanel Brown
 * @version 1.0
 */
-public class User
+public class User extends Person 
 {
-	private String firstN_user;
-	private String lastN_user;
-	private String passWord;
-	private String addBookUsername;
+	private  Password passWord;
+	private String username;
 
-	public User (String fName, String lName, String aBookUser, String pWord)
+	public User (String firstname, String lastname, Gender gender, long dob, String userName, Sting pWord)
 	{
-		this.firstN_user = fName;
-		this.lastN_user = lName;
-		this.passWord = pWord;
-		this.addBookUsername = aBookUser;
+		super(firstname,lastname, gender, dob);
+		this.passWord = new Password(pWord);
+		this.username = userName;
 	}
 
-	public User(String aBookUser, String pWord)
+	public User(String user, String passcode)
 	{
-		this.passWord = pWord;
-		this.addBookUsername = aBookUser;	
+		this.passWord = new Password(passcode);
+		this.username = user;	
 	}
 
-	public String toString()
+	public Sting getUsername()
 	{
-		return addBookUsername+";"+passWord ;
+		return username;
 	}
+
+	public String getName()
+	{
+		String[] nameList = super.getName().split(" ");
+		String firstNAME = nameList[1];
+		String lastNAME = nameList[0];
+
+		return firstNAME + "_" + lastNAME;
+	}
+
 
 	public String getUserFirstname()
 	{
+		String[] nameList = super.getName().split(" ");
+		String firstN_user = nameList[1];
 		return firstN_user;
 	}
 
 	public String getUserLastname()
 	{
-		return lastN_user.toUpperCase();
+		String[] nameList = super.getName().split(" ");
+		String lastN_user = nameList[1];
+		return lastN_user;
+	}
+
+	public byte[] getpassword()
+	{
+		return passWord;
 	}
 }
