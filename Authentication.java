@@ -17,7 +17,7 @@ public class Authentication extends User implements Comparable<User>{
 	public Authentication(String userName, String pWord)
 	{
 		super(userName, pWord);
-		this.checkUser =new User(userName, pWord);
+		Authentication(this.checkUser) =new User(userName, pWord);
 	}
 
 	public void getPasswordFromFile()
