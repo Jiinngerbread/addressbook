@@ -54,7 +54,7 @@ public class Authentication extends User implements Comparable<User>{
 	}
 
 
-	public int  compareTo(User checkUser)
+	public int  compareTo(Authentication checkUser)
 	{
 		int result;
 		for(User u: addressBookusers){
@@ -69,7 +69,7 @@ public class Authentication extends User implements Comparable<User>{
 		return result;
 	}
 
-	public static boolean securityCheck(User checkUser)
+	public boolean securityCheck(Authentication checkUser)
 	{
 		for(User u: addressBookusers)
 		{
