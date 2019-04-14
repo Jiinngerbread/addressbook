@@ -11,10 +11,9 @@ public class Password extends PasswordManager
 	private byte[] encryptedPassword;
 	private byte[] uniqueSalt;
 
-    public Password(String pWord)
+    public Password(String pWord) throws NoSuchAlgorithmException
     {
-    	
-    	this.uniqueSalt = generateSalt();
+        this.uniqueSalt = generateSalt();
     	this.encryptedPassword = getEncryptedPassword(pWord, uniqueSalt); 
     }
 
