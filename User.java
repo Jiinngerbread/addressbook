@@ -1,6 +1,14 @@
 
 import java.util.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 /**
 * This class manages the details of an Addressbook User.
 * @author Jheanel Brown && Esther E
@@ -16,6 +24,7 @@ public class User extends Person
 		super(firstname,lastname, gender, dob);
 		this.passWord = new Password(pWord);
 		this.username = userName;
+
 	}
 
 	/*public User(String user, String passcode)
