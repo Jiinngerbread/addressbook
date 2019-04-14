@@ -64,6 +64,11 @@ public class User extends Person
 
 	public Password getpassword()
 	{
-		return passWord;
+		return passWord.getPassword();
+	}
+
+	public Password getSalt()
+	{
+		return passWord.getUniqueSalt();
 	}
 }
