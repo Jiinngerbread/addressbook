@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Authentication extends User implements Comparable<User>{
 	//private String checkUser;
-	private ArrayList<String> addressBookusers = new ArrayList<String>();
+	private ArrayList<User> addressBookusers = new ArrayList<User>();
 	private String[] eachLine;
 
 	
