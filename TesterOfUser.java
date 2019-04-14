@@ -5,7 +5,7 @@ public class TesterOfUser
 {
   public static void main(String [] args)
   {
-  	User user1 = new User("Jheanel", "Brown", "female", "19940312", "Jinn", "Pencil12Case");
+  	User user1 = new User("Jheanel", "Brown", Gender.FEMALE, 19940312, "Jinn", "Pencil12Case");
   	System.out.println("This is the name of the user: " + user1.getName());
   	System.out.println("This is the first name of the user: " + user1.getUserFirstname());
   	System.out.println("This is the last name of the user: " + user1.getUserLastname());
@@ -15,7 +15,7 @@ public class TesterOfUser
   	System.out.println("This is the password of the user from byte code to string: " + s);
 
   	
-  	User user2 = new User("Brandon", "Lumsden", "male", "19900918", "BrandonBest", "123Passcode546");
+  	User user2 = new User("Brandon", "Lumsden", Gender.MALE, 19900918, "BrandonBest", "123Passcode546");
   	System.out.println("This is the name of the user: " + user2.getName());
   	System.out.println("This is the first name of the user: " + user2.getUserFirstname());
   	System.out.println("This is the last name of the user: " + user2.getUserLastname());
