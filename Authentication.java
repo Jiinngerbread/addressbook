@@ -1,21 +1,56 @@
+import java.lang.*;
+import java.util.*;
+
 public class Authentication extends User implements Comparable<User>{
-	private String username;
-	private String password;
+	
 	private ArrayList<String> addressBookusers = new ArrayList<String>();
 	private String[] eachLine;
 
-	public Authentication(String userName, String passWord){
-		
-		this.username = userName;
-		this.password = password;
-		Authentication scam =new User(userN, pWord);	
+	
+	public Authentication(String userName, String pWord)
+	{
+		super(userName, pWord);
+		Authentication checkThisUser =new User(userName, pWord);
 	}
 
-	public int  check(Authentication scam)
+	public void getPasswordFromFile()
+	{
+		try 
+		{	
+			//String filename = super.getUsername() + "_password.txt";
+			//FileReader fr = new FileReader(filename);
+			FileReader fr = new FileReader("Password.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String oneLine = "";
+			while ((oneLine = br.readLine()) != null)
+			{
+				//slit the line into tokens
+				eachLine = oneLine.split(";");
+
+				//convert where necessary
+				String user = eachLine[0];
+				String password = eachLine[1];
+				User record_of_current_users = new User(user, password);
+				addressBookusers.add(record_of_current_users);
+			}
+		}
+		catch(IOException error)
+		{
+			System.out.println("An error has occured.");
+		}
+
+		catch(NumberFormatException hasTobeNumError)
+		{
+			System.out.println("NOTE: the input has to be a number.");
+		}
+	}
+
+
+	public int  securityCheck()
 	{
 		int result;
 		for(User u: addressBookusers){
-			if(u.compareTo(scam) == 0){
+			if(u.compareTo(checkThisUser) == 0){
 			result=  0;
 			
 			} else {
@@ -23,38 +58,7 @@ public class Authentication extends User implements Comparable<User>{
 			}
 		}
 		return result;
-		
 	}
-
-	public PasswordFileManager(String filename)
-	{
-		try 
-		{	
-			FileReader fr = new FileReader("password.txt");
-			BufferedReader br = new BufferedReader(fr);
-			String oneLine = "";
-			while ((oneLine = br.readLine()) != null)
-				{
-					//slit the line into tokens
-					eachLine = oneLine.split(";");
-
-					//convert where necessary
-					String user = eachLine[0];
-					String password = eachLine[1];
-					User record_of_current_users = new User(user, password)
-					addressBookusers.add(record_of_current_users)
-					
-				}
-		}
-		catch(IOException error)
-			{
-				System.out.println("An error has occured.");
-			}
-
-		catch(NumberFormatException hasTobeNumError)
-		{
-			System.out.println("NOTE: the input has to be a number.");
-		}
 
 
 
@@ -81,16 +85,19 @@ public class Authentication extends User implements Comparable<User>{
 			System.out.println("Password:");
 			passW = sc.nextLine();
 		
-			Authentication try = new Authentication(userN, passW);
+			Authentication test = new User(userN, passW);
+			test.getPasswordFromFile();
 		
-			if(try.check() == 0)
+			if(test.securityCheck() == 0)
 			{
 				numtries = 0;
+				System.out.println("Awesome, lets go to your Addressbook!");
 				//Launch addressbook app
 				
 			} else
 			{
 				System.out.println("Username or password is incorrect, you have two more tries");
+				System.out.println("You have " + numtries + " left.");
 				numtries--1;
 			}
 	
