@@ -11,7 +11,7 @@ public class User extends Person
 	private  Password passWord;
 	private String username;
 
-	public User (String firstname, String lastname, Gender gender, long dob, String userName, Sting pWord)
+	public User (String firstname, String lastname, Gender gender, long dob, String userName, String pWord)
 	{
 		super(firstname,lastname, gender, dob);
 		this.passWord = new Password(pWord);
@@ -24,7 +24,7 @@ public class User extends Person
 		this.username = user;	
 	}*/
 
-	public Sting getUsername()
+	public String getUsername()
 	{
 		return this.username;
 	}
