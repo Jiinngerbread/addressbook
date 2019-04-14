@@ -71,7 +71,7 @@ public class PasswordManager
         catch(InvalidKeySpecException ikeyEx) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
-            return null;
+            return false;
         }
     }
 }
