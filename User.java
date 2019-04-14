@@ -26,7 +26,7 @@ public class User extends Person
 
 	public Sting getUsername()
 	{
-		return username;
+		return this.username;
 	}
 
 	public String getName()
@@ -53,7 +53,7 @@ public class User extends Person
 		return lastN_user;
 	}
 
-	public byte[] getpassword()
+	public Password getpassword()
 	{
 		return passWord;
 	}
