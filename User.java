@@ -6,49 +6,55 @@ import java.util.*;
 * @author Jheanel Brown
 * @version 1.0
 */
-public class User
+public class User extends Person 
 {
-	private String firstN_user;
-	private String lastN_user;
-	private String passWord;
-	private String addBookUsername;
+	private  Password passWord;
+	private String username;
 
-	public User (String fName, String lName, String aBookUser, String pWord)
+	public User (String firstname, String lastname, Gender gender, long dob, String userName, Sting pWord)
 	{
-		this.firstN_user = fName;
-		this.lastN_user = lName;
-		this.passWord = pWord;
-		this.addBookUsername = aBookUser;
-	}
-	
-	public User(String aBookUser, String pWord)
-	{
-		this.passWord = pWord;
-		this.addBookUsername = aBookUser;	
-	}
-	
-	public String getUname()
-	{
-		return this.addBookUsername;
-	}
-	
-	public String getPword()
-	{
-		return this.passWord;
+		super(firstname,lastname, gender, dob);
+		this.passWord = new Password(pWord);
+		this.username = userName;
 	}
 
-	public String toString()
+	public User(String user, String passcode)
 	{
-		return addBookUsername+";"+passWord ;
+		this.passWord = new Password(passcode);
+		this.username = user;	
 	}
+
+	public Sting getUsername()
+	{
+		return username;
+	}
+
+	public String getName()
+	{
+		String[] nameList = super.getName().split(" ");
+		String firstNAME = nameList[1];
+		String lastNAME = nameList[0];
+
+		return firstNAME + "_" + lastNAME;
+	}
+
 
 	public String getUserFirstname()
 	{
+		String[] nameList = super.getName().split(" ");
+		String firstN_user = nameList[1];
 		return firstN_user;
 	}
 
 	public String getUserLastname()
 	{
-		return lastN_user.toUpperCase();
+		String[] nameList = super.getName().split(" ");
+		String lastN_user = nameList[1];
+		return lastN_user;
+	}
+
+	public byte[] getpassword()
+	{
+		return passWord;
 	}
 }
