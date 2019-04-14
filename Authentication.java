@@ -1,20 +1,28 @@
-
-
-public class Authentication
-{
+public class Authentication extends User implements Comparable<User>{
 	private String username;
 	private String password;
 	private ArrayList<String> addressBookusers = new ArrayList<String>();
 	private String[] eachLine;
 
-	public Authentication(String userName, String passWord)
-	{
+	public Authentication(String userName, String passWord){
+		
 		this.username = userName;
 		this.password = password;
+		Authentication scam =new User(userN, pWord);	
 	}
 
-	public boolean check(String userN, String pWord)
+	public int  check(Authentication scam)
 	{
+		int result;
+		for(User u: addressBookusers){
+			if(u.compareTo(scam) == 0){
+			result=  0;
+			
+			} else {
+				result = 1;
+			}
+		}
+		return result;
 		
 	}
 
@@ -33,6 +41,9 @@ public class Authentication
 					//convert where necessary
 					String user = eachLine[0];
 					String password = eachLine[1];
+					User record_of_current_users = new User(user, password)
+					addressBookusers.add(record_of_current_users)
+					
 				}
 		}
 		catch(IOException error)
@@ -59,12 +70,33 @@ public class Authentication
 		System.out.println("|                                                                                                     |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("_____________________________________________________________________________________________________");
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Username:");
-		userN = sc.nextLine();
-		System.out.println("Password:");
-		passW = sc.nextLine();
+		
+		int numtries=3;
+		while(numtries!=0) 
+		{
+		
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Username:");
+			userN = sc.nextLine();
+			System.out.println("Password:");
+			passW = sc.nextLine();
+		
+			Authentication try = new Authentication(userN, passW);
+		
+			if(try.check() == 0)
+			{
+				numtries = 0;
+				//Launch addressbook app
+				
+			} else
+			{
+				System.out.println("Username or password is incorrect, you have two more tries");
+				numtries--1;
+			}
+	
+		}
+		System.out.println("You have exceeded your number of tries, Goodbye");
+		System.exit(0);
 
 	}
 
