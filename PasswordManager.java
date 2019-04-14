@@ -8,13 +8,21 @@ import javax.crypto.spec.PBEKeySpec;
  
 public class PasswordManager
 {
-    public byte[] generateSalt() throws NoSuchAlgorithmException
+    public byte[] generateSalt() 
     {
-        SecureRandom realRandom = SecureRandom.getInstance("SHA1PRNG");
-        byte[] salt = new byte[8];
-        realRandom.nextBytes(salt);
+        try
+        {
+            SecureRandom realRandom = SecureRandom.getInstance("SHA1PRNG");
+            byte[] salt = new byte[8];
+            realRandom.nextBytes(salt);
         
-        return salt;
+            return salt; 
+             
+        } catch(NoSuchAlgorithmException nsae) 
+        {
+            System.err.println("Exception occured in getEncryptedPassword()");
+            return null;
+        }
     }
 
     public byte[] getEncryptedPassword(String passWord, byte[] salt) //throws NoSuchAlgorithmException, InvalidKeySpecException 
