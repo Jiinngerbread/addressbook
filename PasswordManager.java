@@ -35,10 +35,7 @@ public class PasswordManager
         } catch(NoSuchAlgorithmException | InvalidKeySpecException ex) 
         {
             System.err.println("Exception occured in getEncryptedPassword()");
-            return ;
-        } finally 
-        {
-            spec.clearPassword();
+            return null;
         }
     }
 
@@ -52,10 +49,7 @@ public class PasswordManager
         }catch(NoSuchAlgorithmException | InvalidKeySpecException e) 
         {
             System.err.println("Exception occured in authenticationCheck()");
-            return ;
-        } finally 
-        {
-            spec.clearPassword();
+            return null;
         }
     }
 }
