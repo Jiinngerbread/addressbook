@@ -1,5 +1,3 @@
-package contact;
-
 import java.util.*;
 
 /**
