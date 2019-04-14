@@ -49,7 +49,7 @@ public class PasswordManager
         }catch(NoSuchAlgorithmException | InvalidKeySpecException e) 
         {
             System.err.println("Exception occured in authenticationCheck()");
-            return null;
+            return false;
         }
     }
 }
