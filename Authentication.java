@@ -1,5 +1,12 @@
 import java.lang.*;
 import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Authentication extends User implements Comparable<User>{
 	private String checkUser;
