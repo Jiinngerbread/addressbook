@@ -62,12 +62,12 @@ public class User extends Person
 		return lastN_user;
 	}
 
-	public Password getpassword()
+	public byte[] getpassword()
 	{
 		return passWord.getPassword();
 	}
 
-	public Password getSalt()
+	public byte[] getSalt()
 	{
 		return passWord.getUniqueSalt();
 	}
