@@ -18,11 +18,11 @@ public class User extends Person
 		this.username = userName;
 	}
 
-	public User(String user, String passcode)
+	/*public User(String user, String passcode)
 	{
 		this.passWord = new Password(passcode);
 		this.username = user;	
-	}
+	}*/
 
 	public Sting getUsername()
 	{
