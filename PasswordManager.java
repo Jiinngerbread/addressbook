@@ -17,7 +17,7 @@ public class PasswordManager
         return salt;
     }
 
-    public byte[] getEncryptedPassword(String passWord, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException 
+    public byte[] getEncryptedPassword(String passWord, byte[] salt) //throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
             
         String algorithm = "PBKDF2WithHmacSHA1";
@@ -39,7 +39,7 @@ public class PasswordManager
         }
     }
 
-    public boolean authenticationCheck(String attemptedPassword, byte[] encryptedPassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException 
+    public boolean authenticationCheck(String attemptedPassword, byte[] encryptedPassword, byte[] salt) //throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
         try 
         {
