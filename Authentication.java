@@ -98,7 +98,7 @@ public class Authentication extends User implements Comparable<User>{
 			{
 				System.out.println("Username or password is incorrect, you have two more tries");
 				System.out.println("You have " + numtries + " left.");
-				numtries--1;
+				numtries-=1;
 			}
 	
 		}
