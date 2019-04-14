@@ -2,7 +2,7 @@ import java.lang.*;
 import java.util.*;
 
 public class Authentication extends User implements Comparable<User>{
-	
+	private String checkUser;
 	private ArrayList<String> addressBookusers = new ArrayList<String>();
 	private String[] eachLine;
 
@@ -10,7 +10,7 @@ public class Authentication extends User implements Comparable<User>{
 	public Authentication(String userName, String pWord)
 	{
 		super(userName, pWord);
-		Authentication checkThisUser =new User(userName, pWord);
+		this.checkUser =new User(userName, pWord);
 	}
 
 	public void getPasswordFromFile()
@@ -46,18 +46,35 @@ public class Authentication extends User implements Comparable<User>{
 	}
 
 
-	public int  securityCheck()
+	public int  compareTo(User checkUser)
 	{
 		int result;
 		for(User u: addressBookusers){
-			if(u.compareTo(checkThisUser) == 0){
-			result=  0;
+			if(u == checkUser)
+			{
+				result =  0;
 			
 			} else {
-				result = 1;
+				result =  1;
 			}
 		}
 		return result;
+	}
+
+	public boolean securityCheck(User checkUser)
+	{
+		for(User u: addressBookusers)
+		{
+			if(u.compareTo(checkUser)== 0)
+			{
+				return true
+			}
+			else
+			{
+				System.out.println("Incorrect username and password combination");
+				return false
+			}
+		}
 	}
 
 
@@ -88,7 +105,7 @@ public class Authentication extends User implements Comparable<User>{
 			Authentication test = new User(userN, passW);
 			test.getPasswordFromFile();
 		
-			if(test.securityCheck() == 0)
+			if(securityCheck(test) == true)
 			{
 				numtries = 0;
 				System.out.println("Awesome, lets go to your Addressbook!");
