@@ -10,6 +10,7 @@ public class DataManager
 {
 	//private ArrayList <Contact> ContactList = new ArrayList<Contact>();
 	private String[] allInfo ;
+	
 	//private ArrayList <User> userList; 
 
 	//Check if there exists a folder in directory
@@ -35,7 +36,7 @@ public class DataManager
 			while ((oneLine = br.readLine()) != null)
 			{
 				//slit the line into tokens
-				eachLine = oneLine.split(";");
+				String[] eachLine = oneLine.split(";");
 
 				//convert where necessary
 				String userN = eachLine[0];
@@ -107,12 +108,13 @@ public class DataManager
 				String[] contactData = contactInfo.split(",");
 				String firstN = contactData[0]; //needs to be string, string, gender, long
 				String lastN = contactData[1];
-				Gender gender = Gender.valueOf(contactData[2]);
+				Gender gender = Gender.valueOf(contactData[2]);********
 				long dateOB = Long.parseLong(contactData[3]);
+				
 				//________________________
 				String[] phoneData = contactPhones.split(",");
-				char pType = phoneData[0].charAt(0);
-				long pNumber = Long.parseLong(phoneData[1]);
+				/*char pType = phoneData[0].charAt(0);**********
+				long pNumber = Long.parseLong(phoneData[0][1]);*/
 				//________________________
 				String[] emails = contactEmails.split(",");
 				//________________________
@@ -122,13 +124,17 @@ public class DataManager
 		
 				for(int i = 0; i< phoneData.length(); i++)
 				{
+					// i am thinking that each ph# stored in the file will begin with a character that represents the ph# type
+					char pType = phoneData[i].charAt(0); 
+					long pNumber = Long.parseLong(phoneData[i][1:]);
 					eachContact.addPhone(pType, pNumber);
 				}
 
 				for(int i = 0; i< emails.length(); i++ )
 				{
-					int index = 0;
-					eachContact.addEmail(emails[index]), index ++;
+					//int index = 0;
+					//eachContact.addEmail(emails[index]), index ++;
+					eachContact.addEmail(i);
 				}
 			}
 		}
