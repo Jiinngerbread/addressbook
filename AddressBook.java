@@ -70,6 +70,9 @@ public class AddressBook
 			long number = Long.parseLong(sc1.nextLine());
 		
 			newC.addPhone(type, number);
+			System.out.println("Would you like to add a phone number? 'Y' for yes, 'N' for no.");
+			response = add.nextLine();
+			
 		}
 		/*System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
 		char type = add.next().charAt(0);
@@ -115,9 +118,10 @@ public class AddressBook
 				System.out.println("Input next email: " );
 				Scanner sc2 = new Scanner(System.in);
 				String addEmail2 = sc2.nextLine();
+				newContact.addEmail(addEmail2);
+				
 				System.out.println("Would you like to add another email? 'Y' for yes, 'N' for no. ");
 				response3 = sc2.nextLine();
-				newContact.addEmail(addEmail2);
 			}
 			while(response3.toUpperCase().compareTo("Y")== 0);
 		}
@@ -129,7 +133,6 @@ public class AddressBook
 	public void statusToLaunch()
 	{
 		int numtries=0;
-		boolean loginStatus = false;
 
 		while(numtries<3) 
 		{
@@ -141,18 +144,12 @@ public class AddressBook
 			
 			if(DataManager.Authenticate(userN, passW) == true)
 			{
-				loginStatus = true;
-				//Launch addressbook app
-				
+				AddressBook activeUserAB = new AddressBook(userN);
+				mainMenu();	
 			} else
 			{
 				System.out.println("Username or password is incorrect, you have two more tries");
 				numtries++;
-			}
-			if(loginStatus == true)
-			{
-				AddressBook activeUserAB = new AddressBook(userN);
-				mainMenu();
 			}
 		}
 		System.out.println("You have exceeded your number of tries, Goodbye");
@@ -206,12 +203,21 @@ public class AddressBook
 
 	public String[] searchByEntry()
 	{
-
-	}
-
-	public String[] searchByEntry()
-	{
-
+		Scanner sbe = new Scanner(System.in);
+		System.out.println("Enter entry number");
+		int entryNum = sbe.nextInt();
+		
+		for(Contact c: contacts)
+		{
+			if (c.getEntry().equals(entryNum)
+			{
+			return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ "," + c.getPhoneList() + ","c.getEmailList());
+			}
+		
+		}
+		
+		
+		
 	}
 
 	public String[] searchByEmail()
@@ -256,7 +262,8 @@ public class AddressBook
 				Scanner subsubChangeLN = new Scanner(System.in);
 			 	System.out.println("Please input the new Alias");
 			 	String newLastN = subsubChangeLN.nextLine();
-			 	
+			 
+				
 				newc.updateName(newLastN);
 				//can i call the contact object here 
 				System.out.println("Successfully updated Lastname");
