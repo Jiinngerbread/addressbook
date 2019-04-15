@@ -229,8 +229,8 @@ public class AddressBook
 		
 	}
 
-    public void subsubNavigationMenu()
-    {
+ 	public void subsubNavigationMenu()
+ 	{
     	Scanner optionEdit = new Scanner(System.in);
 		String editChoice = optionEdit.nextLine().toUpperCase();
 
