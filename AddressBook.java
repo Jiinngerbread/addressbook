@@ -21,7 +21,7 @@ public class AddressBook
 		data = new DataManager();
 		this.contacts = DataManager.readFile(username);
 	}
-	
+
 	public void add(String firstName, String lastName, Gender gender, long dob)
 	{
 		Contact newC = new Contact(firstName, lastName, gender, dob);
@@ -180,17 +180,26 @@ public class AddressBook
 		System.exit();
 	}
 
+	public void changeAlias(String newAlias)
+	{
+		newC.getAlias() = newAlias;
+	}
+	public void changeAddress(String newAdd)
+	{
+		newC.getAddress() = newC.setAddress(newAdd);
+	}
+
+	public String[] searchByEntry()
+	{
+
+	}
+
 	public String[] searchByEntry()
 	{
 
 	}
 
 	public String[] searchByEmail()
-	{
-
-	}
-
-	public String changeAlias()
 	{
 
 	}
@@ -229,25 +238,53 @@ public class AddressBook
 		{
 			if (editChoice.equals("A")) 
 			{	
-				return 
+				Scanner subsubChangeLN = new Scanner(System.in);
+			 	System.out.println("Please input the new Alias");
+			 	String newLastN = subsubChangeLN.nextLine();
+			 	Scanner.close();
+				newc.updateName(newLastN);
+				//can i call the contact object here 
+				System.out.println("Successfully updated Lastname");
 		 	} 
 		 	
 		 	else if (editChoice.equals("B")) 
 		 	{
-			 	return 			 	
+			 	Scanner subsubAlias = new Scanner(System.in);
+			 	System.out.println("Please input the new Alias");
+			 	String newAlias = subsubAlias.nextLine();
+			 	Scanner.close();
+			 	newC.changeAlias(newAlias);
+			 	System.out.println("Successfully updated Alias");			 	
 			} 
 
 			else if (editChoice.equals("C")) 
 			{
-		 		return 
-		 	}
+		 		Scanner subsubAddress = new Scanner(System.in);
+			 	System.out.println("Please input the new Address, each line separated by ';'. ");
+			 	String newAadd = subsubAddress.nextLine();
+			 	Scanner.close();
+			 	newC.changeAddress(newAdd);
+			 	System.out.println("Successfully updated Address");
+			 }
 		 	else if(editChoice.equals("D"))
 		 	{
-		 		return 
+		 		Scanner subsubAddPhone = new Scanner(System.in);
+			 	System.out.println("Please input the type of Phone; M- mobile, W- Work, H- Home: ");
+			 	Char newPhonetype = subsubAddPhone.next().charAt(0);
+			 	System.out.println("Please input the 10 digit phone number ");
+			 	Long number = Long.parseLong(subsubAddPhone.nextLine());
+			 	Scanner.close();
+			 	newC.addPhone(newPhonetype, number);
+			 	System.out.println("Successfully added phone to contact");
 		 	}
 		 	else if(editChoice.equals("E"))
 		 	{
-		 		return 
+		 		Scanner subsubAddEmail = new Scanner(System.in);
+			 	System.out.println("Please input the new Alias");
+			 	String newEmail = subsubAddEmail.nextLine();
+			 	Scanner.close();
+			 	newC.changeAlias(newPhone);
+			 	System.out.println("Successfully added phone to contact");
 		 	}
 		 	else if(editChoice.equals("F"))
 		 	{
