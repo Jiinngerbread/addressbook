@@ -4,8 +4,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class FileManager
+public class DataManager
 {
+	private ArrayList <Contact> ContactList = new ArrayList<Contact>();
+	private String[] allInfo ;
+
 	//Check if there exists a folder in directory
 	// specific Users folder ie Addressbook user && specific user folder ie James 
 
@@ -19,7 +22,107 @@ public class FileManager
 	// we want to write to the file 
 
 	//we want to edit the file /manipulate the file 
+	public boolean Authenticate(String username, String password)
+	{
+		try 
+		{	
+			FileReader fr = new FileReader("UserCredentials.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String oneLine = "";
+			while ((oneLine = br.readLine()) != null)
+			{
+				//slit the line into tokens
+				eachLine = oneLine.split(";");
 
+				//convert where necessary
+				String userN = eachLine[0];
+				String passW = eachLine[1];
+				
+				if(userN == username && passW == password)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+		catch(IOException error)
+		{
+			System.out.println("An error has occured.");
+		}
+	}
+
+	public ArrayList<Contacts> readFile(String username)
+	{
+		try 
+		{	
+			String filename = username+"_addressbook.txt" 
+			FileReader fr = new FileReader(filename);
+			BufferedReader br = new BufferedReader(fr);
+			
+			String eachLine = "";
+			
+			
+			while ((eachLine = br.readLine()) != null)
+			{
+				//slit the line into tokens
+					allInfo = eachLine.split("\"");
+
+					//convert initial string split
+					String contactAlias = allInfo[0];
+					String contactInfo = allInfo[1]; //needs to be string, string, gender, long
+					String contactAddress = allInfo[2];
+					String contactPhones = allInfo[3];//needs to be CHAR and LONG
+					String contactEmails = allInfo[4];
+
+					//converting derived strings into more useful form 
+
+					String[] contactData = contactInfo.split(",");
+
+					String firstN = contactData[0]; //needs to be string, string, gender, long
+					String lastN = contactData[1];
+					Gender gender = Gender.valueOf(contactData[2]);
+					long dateOB = Long.parseLong(contactData[3]);
+					//________________________
+					String[] phoneData = contactPhones.split(",");
+
+					char pType = phoneData[0].charAt(0);
+					long pNumber = Long.parseLong(phoneData[1]);
+
+					//________________________
+					String[] emails = contactEmails.split(",");
+
+					//________________________
+					Contact eachContact = new Contact(firstN, lastN, gender,dateOB);
+					eachContact.setAddress(contactAddress);
+					eachContact.setAlias(contactAlias);
+					
+					for(int i = 0; i< phoneData.length(); i++)
+					{
+						eachContact.addPhone(pType, pNumber);
+					}
+
+					for(int i = 0; i< emails.length(); i++ )
+					{
+						int index = 0;
+						eachContact.addEmail(emails[index]), index ++;
+					}
+
+
+				}
+		}
+		catch(IOException error)
+			{
+				System.out.println("An error has occured.");
+			}
+
+		catch(NumberFormatException hasTobeNumError)
+		{
+			System.out.println("NOTE: the input has to be a number.");
+		}
+	}
 	
 
 	
