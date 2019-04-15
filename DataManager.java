@@ -8,7 +8,7 @@ import java.util.*;
 
 public class DataManager
 {
-	//private ArrayList <Contact> ContactList = new ArrayList<Contact>();
+	private ArrayList <Contact> ContactList = new ArrayList<Contact>();
 	private String[] allInfo ;
 	
 	//private ArrayList <User> userList; 
@@ -124,7 +124,7 @@ public class DataManager
 		
 				for(int i = 0; i< phoneData.length(); i++)
 				{
-					// i am thinking that each ph# stored in the file will begin with a character that represents the ph# type
+		// i am thinking that each ph# stored in the file will begin with a character that represents the ph# type
 					char pType = phoneData[i].charAt(0); 
 					long pNumber = Long.parseLong(phoneData[i][1:]);
 					eachContact.addPhone(pType, pNumber);
@@ -136,7 +136,10 @@ public class DataManager
 					//eachContact.addEmail(emails[index]), index ++;
 					eachContact.addEmail(i);
 				}
+				
+				ContactList.add(eachContact);
 			}
+			return ContactList;
 		}
 		catch(IOException error)
 		{
