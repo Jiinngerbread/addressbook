@@ -21,9 +21,11 @@ public class AddressBook
 		data = new DataManager();
 		this.contacts = DataManager.readFile(username);
 	}
+	
 	public void add(String firstName, String lastName, Gender gender, long dob)
 	{
-
+		Contact newC = new Contact(firstName, lastName, gender, dob);
+		contacts.add(newC);
 	}
 
 	public void add()
