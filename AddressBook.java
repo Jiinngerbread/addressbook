@@ -56,7 +56,22 @@ public class AddressBook
 		newC.setAddress(address);
 		
 		System.out.println("_____________________________________________________________________________________________________")
-		System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
+		System.out.println("Would you like to add a phone number? 'Y' for yes, 'N' for no.");
+		String response = add.nextLine();
+		while(response.toUpperCase().compareTo("Y")== 0)
+		{
+					
+			Scanner sc1 = new Scanner(System.in);
+			System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
+
+			char type = sc1.next().charAt(0);
+
+			System.out.println("10 digit number: ");
+			long number = Long.parseLong(sc1.nextLine());
+		
+			newC.addPhone(type, number);
+		}
+		/*System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
 		char type = add.next().charAt(0);
 
 		System.out.println("10 digit number: ");
@@ -80,7 +95,7 @@ public class AddressBook
 				Scanner sc1 = new Scanner(System.in);
 				response2 = sc1.nextLine();
 			}
-			while(response2.toUpperCase().compareTo("Y")== 0);
+			while(response2.toUpperCase().compareTo("Y")== 0);*/
 		}
 		System.out.println("_____________________________________________________________________________________________________")
 
