@@ -5,20 +5,25 @@ import java.util.*;
 
 /**
 * This class manages the contacts.
-* @author Jheanel Brown
+* @author Jheanel Brown && Esther E
 * @version 1.0
 */
-public class AddressBook
+public class AddressBook implements DataManager
 {
-	private ArrayList<Contact> addressBook = new ArrayList<Contact>();
-	
-	
+	private ArrayList<Contact> contacts;
+	private DataManager data;
 
-	public void add(String firstName, String lastName)
+	public AddressBook()
 	{
-		this.firstN_user = firstName;
-		this.lastN_user = lastName;
+		this.username = userN;
+		data = new DataManager();
+		this.contacts = DataManager.readFile(username);
+	}
+	
 
+	public void add(String firstName, String lastName, Gender gender, long dob)
+	{
+		contacts.add(new Contact(firstName,lastName, gender, dob));
 	}
 
 
