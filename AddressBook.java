@@ -8,14 +8,15 @@ import java.util.*;
 * @author Jheanel Brown && Esther E
 * @version 1.0
 */
-public class AddressBook implements DataManager
+public class AddressBook 
 {
 	private ArrayList<Contact> contacts;
 	private DataManager data;
+	private String username;
 
-	public AddressBook()
+	public AddressBook(String userName)
 	{
-		this.username = userN;
+		this.username = userName;
 		data = new DataManager();
 		this.contacts = DataManager.readFile(username);
 	}
@@ -23,7 +24,10 @@ public class AddressBook implements DataManager
 
 	public void add(String firstName, String lastName, Gender gender, long dob)
 	{
-		contacts.add(new Contact(firstName,lastName, gender, dob));
+		Contact newContact = new Contact(firstName,lastName, gender, dob);
+		newContact.setAddress= 
+		contacts.add(newContact);
+
 	}
 
 
