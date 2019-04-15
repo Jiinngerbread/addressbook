@@ -8,6 +8,7 @@ public class TextUI
 
 	}
 		
+	//create a main method for stepwise launch of the interface	
 	public void onLaunch()
 	{
 		ystem.out.println("______________________________________________________________________________________________________");
