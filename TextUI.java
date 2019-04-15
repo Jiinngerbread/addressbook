@@ -39,40 +39,8 @@ public class TextUI
 		System.out.println("_____________________________________________________________________________________________________");
 		System.out.println();
 		System.out.println();
-		int numtries=0;
-		boolean loginStatus = false;
-
-		while(numtries<3) 
-		{
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Username:");
-			String userN = sc.nextLine();
-			System.out.println("Password:");
-			String passW = sc.nextLine();
 		
-			if(DataManager.Authenticate(userN, passW) == true)
-			{
-				loginStatus = true;
-				//Launch addressbook app
-				
-			} else
-			{
-				System.out.println("Username or password is incorrect, you have two more tries");
-				numtries++;
-			}
-
-			if(loginStatus == true)
-			{
-				AddressBook activeUserAB = new AddressBook(userN);
-				mainMenu();
-
-			}
-	
-		}
-		System.out.println("You have exceeded your number of tries, Goodbye");
-		System.exit(0);
-
-	}
+		AddressBook.statusToLaunch();
 
 	public void mainMenu()
 	{
@@ -102,35 +70,7 @@ public class TextUI
 		Scanner capture = new Scanner(System.in);
 		String option = capture.nextLine().toUpperCase();
 
-		while (!option.equals("F")) 
-		{
-			if (option.equals("A")) 
-			{	
-	
-		 	} 
-		 	
-		 	else if (option.equals("B")) 
-		 	{
-			 				 	
-			} 
-
-			else if (option.equals("C")) 
-			{
-		 	
-		 	}
-		 	else if(option.equals("D"))
-		 	{
-
-		 	}
-		 	else(option.equals("E"))
-		 	{
-
-		 	}
-
-		 	System.out.println("A - Create a contact\nB - Search\nC - View Contacts\nD - Delete a contact\nE - Save AddressBook to file" );
-			option = capture.nextLine();
-		}
-		System.out.println("-------------Goodbye---------------");
+		mainMenuNavigation();
 	}
 
 	public void subMenu_A()
@@ -139,70 +79,252 @@ public class TextUI
 		System.out.println("|                                 CREATE A NEW CONTACT                                                |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("|    To create a contact you need to provide the following information:                               |");
-		System.out.println("|       * The contact's Name (firs, then lastname);                                                   |");
-		System.out.println("|       * Gender;                                                                                     |");
-		System.out.println("|       * Date of Birth in the format of yyyymmdd;                                                    |");
-		System.out.println("|       * An Alias for the contact;                                                                   |");
+		System.out.println("|       *  The contact's Name (firs, then lastname);                                                  |");
+		System.out.println("|       *  Gender;                                                                                    |");
+		System.out.println("|       *  Date of Birth in the format of yyyymmdd;                                                   |");
+		System.out.println("|       *  An Alias for the contact;                                                                  |");
 		System.out.println("|                                                                                                     |");
-		System.out.println("|       * An address                                                                                  |")
-		System.out.println("|         (this is written in one line with a semicolons to specify where a new line begins           |");
-		System.out.println("|            no more than 5 lines are permitted);                                                     |");
+		System.out.println("|       *  An address                                                                                 |") 
+		System.out.println("|             (this is written in one line with a semicolons to specify where a new line begins       |");
+		System.out.println("|               no more than 5 lines are permitted);                                                  |");
 		System.out.println("|                                                                                                     |");
-		System.out.println("|       * Phone numbers                                                                               |");
-		System.out.println("|         (Here you will specify the type of phone: H- home, W- Work, M - Mobile,                     |");
-		System.out.println("|           and 10 digit phone number);                                                               |");
+		System.out.println("|       *  Phone numbers                                                                              |");
+		System.out.println("|             (Here you will specify the type of phone: H- home, W- Work, M - Mobile,                 |");
+		System.out.println("|               and 10 digit phone number);                                                           |");
 		System.out.println("|                                                                                                     |");
-		System.out.println("|       * Email address                                                                                             |");
+		System.out.println("|       *  Email address                                                                              |");
 		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |") 
 		System.out.println("|                                                                                                     |");
 		System.out.println("|_____________________________________________________________________________________________________|");
 		System.out.println();
 		System.out.println();
 		System.out.println();
 
-		Scanner add = new Scanner(System.in);
+		AddressBook.add();
+		mainMenu();
+	}
 
-		System.out.println("Firstname: ");
-		String first = add.nextLine();
+		public void subMenu_B()
+	{
+		System.out.println("______________________________________________________________________________________________________");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                     SEARCH FOR CONTACT                                                   |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|    1 - Search by entry Number 							2 - Search by Email                                                                                               |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |") 
+		System.out.println("|                                                                                                     |");
+		System.out.println("|_____________________________________________________________________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
-		System.out.println("Lastname: ");
-		String last = add.nextLine();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input 1 to search for a contact by entry number or 2 to search by email: ");
+		int searchBy = sc.nextInt();
+		switch
+		{
+			case 1:
+				AddressBook.searchByEntry();
+				//the method called will display the contact
+				// subsubMenu_1() can be called to further edit a contact
+			break;
+			case 2: 
+				AddressBook.searchByEmail();
+				// subsubMenu_1() to further edit a contact
+			break;
+			default:
+			System.out.println("Input invalid!");
+			mainMenu()
+		}
+		mainMenu();
+	}
 
-		System.out.println("Date of Birth, yyyymmdd: ");
-		Long dob = Long.parseLong(add.nextLine());
+		public void subMenu_C()
+	{
+		System.out.println("______________________________________________________________________________________________________");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                     VIEW All CONTACT                                                   |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|    1 - Sorted by entry Number 							2 - Sorted by Name                                                                                               |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |") 
+		System.out.println("|                                                                                                     |");
+		System.out.println("|_____________________________________________________________________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
-		System.out.println("Gender (MALE or FEMALE): ");
-		Gender gender = Gender.valueOf(add.nextLine());
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input 1 to search for a contact by entry number or 2 to search by email: ");
+		int searchBy = sc.nextInt();
+		switch
+		{
+			case 1:
+				AddressBook.sortAllByEntry();
+				// subsubMenu_1() to further edit a contact
+			break;
+			case 2: 
+				AddressBook.sortAllByName();
+				// subsubMenu_1() to further edit a contact
+			break;
+			default:
+			System.out.println("Input invalid!");
+			mainMenu()
+		}
+		mainMenu();
+	}
 
-		Contact newC = new Contact(first, last, gender, dob);
-		//AddressBook.add(String firstName, String lastName, Gender gender, long dob)
+	public void subsubMenu_1()
+	{
+		System.out.println("__________________________________________________________________________________");
+		System.out.println("|                                                                                |");
+		System.out.println("|                                      EDIT CONTACT DATA                         |");
+		System.out.println("|                                                                                |");
+		System.out.println("|                                                                                |");
+		System.out.println("|     A - Change Last Name                                                       |");
+		System.out.println("|     B - Change Alias                                                           |");
+		System.out.println("|     C - Change Address                                                         |");
+		System.out.println("|     D - Add Phone Number                                                       |");
+		System.out.println("|     E - Add Email Address                                                      |"); 
+		System.out.println("|     F - Delete Phone Number                                                    |");
+		System.out.println("|     G - Delete Email Address                                                   |");
+		System.out.println("|     X - Return to Main Menu                                                    |");
+		System.out.println("|                                                                                |");
+		System.out.println("|________________________________________________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
-		System.out.println("Alias");
-		String altName = add.nextLine();
-		newC.setAlias(altName);
-
-		System.out.println("Addres (street;street2;street3;city;country): ")
-		String address = add.nextLine();
-		newC.setAddress(address);
-
-		System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
-		char type = add.next().charAt(0);
-
-		System.out.println("10 digit number: ");
-		long number = Long.parseLong(add.nextLine());
-		newC.addPhone(type, number);
-
-		System.out.println("Email address: ");
-		String emailAdd = add.nextLine();
-		newC.addEmail(emailAdd);
-
-
-
-
-
-
-
+		AddressBook.subsub_NavigationMenu();
+		mainMenu();
 	}
 
 
+	public void subMenu_D()
+	{
+		System.out.println("_____________________________________________________________________");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                          DELETE A CONTACT                         |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |");
+		System.out.println("|  1 - Specify Entry Number                                         |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |") 
+		System.out.println("|  2 - Specify Email Address                                        |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |");
+		System.out.println("|                                                                   |");
+		System.out.println("|___________________________________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		Scanner sc5 = new Scanner(System.in);
+		System.out.println("Input 1 to search for a contact by entry number or 2 to search by email: ");
+		int searchBy = sc5.nextInt();
+		switch
+		{
+			case 1:
+				String delByEN = sc5.nextLine();
+				AddressBook.deleteContactbyEN(delByEN);
+				System.out.println("Contact removed from AddressBook.");
+			break;
+			case 2: 
+				String delByEmail = sc5.nextLine();
+				AddressBook.deleteContactbyEmail(delByEmail);
+				System.out.println("Contact removed from AddressBook.");
+			break;
+			default:
+			System.out.println("Input invalid!");
+			mainMenu()
+		}
+		mainMenu();
+	}
+
+
+	public void subMenu_E()
+	{
+		System.out.println("________________________________________________");
+		System.out.println("|              SAVE TO FILE                    |");
+		System.out.println("|                                              |");
+		System.out.println("|                                              |");
+		System.out.println("| Great!                                       |");
+		System.out.println("|                                              |");
+		System.out.println("| Lets update your database,                   |");
+		System.out.println("|   Addressbook saves your contacts to         |");
+		System.out.println("|   a text file with your username.            |");
+		System.out.println("|                                              |") 
+		System.out.println("|                                              |");
+		System.out.println("|              . . . . . . . . .               |");
+		System.out.println("|______________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		AddressBook.saveToFile();
+		mainMenu();
+	}
+
+
+	public void subMenu_F()
+	{
+		System.out.println("______________________________________________________________________________________________________");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                       	Goodbye!                                                  |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|_____________________________________________________________________________________________________|")
+
+	
+	}
+
+
+	/*public void subMenu_()
+	{
+		System.out.println("______________________________________________________________________________________________________");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |") 
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |") 
+		System.out.println("|                                                                                                     |");
+		System.out.println("|_____________________________________________________________________________________________________|");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		AddressBook.add();
+		mainMenu();*/
 }
+
+
+
+
