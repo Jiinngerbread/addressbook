@@ -204,4 +204,9 @@ public class Contact extends Person
 		String[] tempPhoneList = phoneString.toArray(new String[phones.size()]);
 		return tempPhoneList;
 	}
+
+	public String toString
+	{
+		return getEntry() + ", " + getName()+ ", " + super.getGender() + ", " + getEmailList();
+	}
 }
