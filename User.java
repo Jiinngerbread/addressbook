@@ -37,12 +37,11 @@ public class User
 	private  String password;
 	private String username;
 	
-
+//This class should be able to write to a file
 	public User (String userNAME, String passWORD) 
 	{
 		this.password = passWORD;
-		this.username = userNAME;
-		
+		this.username = userNAME;	
 
 	}
 
@@ -54,5 +53,10 @@ public class User
 	public String getpassword()
 	{
 		return this.password;
+	}
+
+	public String toString()
+	{
+		return this.username + ";" + this.password;
 	}
 }
