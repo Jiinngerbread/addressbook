@@ -207,6 +207,6 @@ public class Contact extends Person
 
 	public String toString
 	{
-		return getEntry() + ", " + getName()+ ", " + super.getGender() + ", " + getEmailList();
+		return (getEntry() + ", " + getName()+ ", " + super.getGender() + ", " + getAlias()+ "," getEmailList());
 	}
 }
