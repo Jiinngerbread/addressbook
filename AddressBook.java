@@ -229,7 +229,7 @@ public class AddressBook
 		
 	}
 
-    public void subsub_NavigationMenu()
+    public void subsubNavigationMenu()
     {
     	Scanner optionEdit = new Scanner(System.in);
 		String editChoice = optionEdit.nextLine().toUpperCase();
@@ -241,10 +241,11 @@ public class AddressBook
 				Scanner subsubChangeLN = new Scanner(System.in);
 			 	System.out.println("Please input the new Alias");
 			 	String newLastN = subsubChangeLN.nextLine();
-			 	Scanner.close();
+			 	
 				newc.updateName(newLastN);
 				//can i call the contact object here 
 				System.out.println("Successfully updated Lastname");
+		 		subsubChangeLN.close();
 		 	} 
 		 	
 		 	else if (editChoice.equals("B")) 
@@ -252,20 +253,21 @@ public class AddressBook
 			 	Scanner subsubAlias = new Scanner(System.in);
 			 	System.out.println("Please input the new Alias");
 			 	String newAlias = subsubAlias.nextLine();
-			 	Scanner.close();
+			 	
 			 	newC.changeAlias(newAlias);
 			 	System.out.println("Successfully updated Alias");			 	
+				subsubAlias.close();
 			} 
 
 			else if (editChoice.equals("C")) 
 			{
 		 		Scanner subsubAddress = new Scanner(System.in);
 			 	System.out.println("Please input the new Address, each line separated by ';'. ");
-			 	String newAadd = subsubAddress.nextLine();
-			 	Scanner.close();
+			 	String newAdd = subsubAddress.nextLine();
 			 	newC.changeAddress(newAdd);
 			 	System.out.println("Successfully updated Address");
-			 }
+				subsubAddress.close();
+			}
 		 	else if(editChoice.equals("D"))
 		 	{
 		 		Scanner subsubAddPhone = new Scanner(System.in);
@@ -276,26 +278,85 @@ public class AddressBook
 			 	Scanner.close();
 			 	newC.addPhone(newPhonetype, number);
 			 	System.out.println("Successfully added phone to contact");
+		 		//below for multiple adds
+		 		/*System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
+				char type = subsubAddPhone.next().charAt(0);
+
+				System.out.println("10 digit number: ");
+				long number = Long.parseLong(subsubAddPhone.nextLine());
+				newC.addPhone(type, number);
+
+				System.out.println("Would you like to add another number? 'Y' for yes, 'N' for no.");
+				String response = subsubAddPhone.nextLine();
+				
+				if(response.toUpperCase().compareTo("Y")== 0)
+				{
+					String response3 = "";
+					do
+					{ 
+						System.out.println("Input next phone type then  number: " );
+						char addType = subsubAddPhone.next().charAt(0);
+						long addNumber = subsubAddPhone.nextLong();
+						newC.addPhone(addType, addNumber);
+						System.out.println();
+						System.out.println("Would you like to add another number? 'Y' for yes, 'N' for no");
+					
+						response3 = subsubAddPhone.nextLine();
+					}
+					while(response3.toUpperCase().compareTo("Y")== 0);
+				}*/
+				subsubAddPhone.close();
 		 	}
 		 	else if(editChoice.equals("E"))
 		 	{
 		 		Scanner subsubAddEmail = new Scanner(System.in);
-			 	System.out.println("Please input the new Alias");
+			 	System.out.println("Please input the new Email");
 			 	String newEmail = subsubAddEmail.nextLine();
-			 	Scanner.close();
-			 	newC.changeAlias(newPhone);
-			 	System.out.println("Successfully added phone to contact");
+			 	
+			 	newC.changeAlias(newEmail);
+			 	System.out.println("Successfully added email to contact");
+		 	
+		 		/*System.out.println("Would you like to add another email address? 'Y' for yes, 'N' for no.");
+				String emailR = subsubAddEmail.nextLine();
+		
+				if(emailR.toUpperCase().compareTo("Y")== 0)
+				{
+					String response5 = "";
+					do
+					{ 
+						System.out.println("Input next email: " );
+						Scanner subsubAddEmail = new Scanner(System.in);
+						String addEmail2 = subsubAddEmail.nextLine();
+						System.out.println("Would you like to add another email? 'Y' for yes, 'N' for no. ");
+						response5 = subsubAddEmail.nextLine();
+						newContact.addEmail(addEmail2);
+					}
+					while(response5.toUpperCase().compareTo("Y")== 0);
+				}*/
+				subsubAddEmail.close();
 		 	}
 		 	else if(editChoice.equals("F"))
 		 	{
-		 		return 
+		 		Scanner subsubDeletePh = new Scanner(System.in);
+			 	System.out.println("Please input the number you want to delete");
+			 	Long phoneToDelete = Long.parseLong(subsubDeletePh.nextLine()); 
+			 	
+			 	newC.deletePhone(phoneToDelete);
+			 	System.out.println("Phone number has been deleted.");
+			 	subsubDeletePh.close();
 		 	}
 		 	else if(editChoice.equals("G"))
 		 	{
-		 		return 
+		 		Scanner subsubDeleteEmail = new Scanner(System.in);
+			 	System.out.println("Please input the email you want to delete");
+			 	String emailToDelete = subsubDeleteEmail.nextLine(); 
+			 	
+			 	newC.deletePhone(emailToDelete);
+			 	System.out.println("Email  has been deleted.");
+			 	subsubDeleteEmail.close(); 
 		 	}
 		 	System.out.println("A - Change lastname\nB - Change Alias\nC - Change Address\nD - Add Phone Number \nE - Add Email Address\nF - Delete Phone Number\n G - Delete Email Address\nH - Delete contact from AddressBook\nX - Return to Main Menu" );
 			editChoice = optionEdit.nextLine().toUpperCase();
-		}
-    }	
+		}	 	
+	}
 }
