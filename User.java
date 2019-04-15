@@ -1,14 +1,16 @@
 import java.util.*;
+import java.io.Serializable;
 
 /**
 * This class manages the details of an Addressbook User.
 * @author Jheanel Brown && Esther E
 * @version 1.0
 */
-public class User 
+public class User //implements Serializable
 {
 	private  String password;
 	private String username;
+	private static final long serialVersionUID = 1L;
 
 	public User (String userNAME, String passWORD) 
 	{
@@ -55,8 +57,9 @@ public class User
 		return this.password;
 	}
 
+	@Override
 	public String toString()
 	{
-		return this.username + ";" + this.password;
+		return new StringBufferthis.username + ";" + this.password;
 	}
 }
