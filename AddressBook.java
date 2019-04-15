@@ -201,11 +201,11 @@ public class AddressBook
 		newC.getAddress() = newC.setAddress(newAdd);
 	}
 
-	public String[] searchByEntry()
+	public String searchByEntry()
 	{
-		Scanner sbe = new Scanner(System.in);
+		Scanner sben = new Scanner(System.in);
 		System.out.println("Enter entry number");
-		int entryNum = sbe.nextInt();
+		int entryNum = sben.nextInt();
 		
 		for(Contact c: contacts)
 		{
@@ -213,15 +213,26 @@ public class AddressBook
 			{
 			return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ "," + c.getPhoneList() + ","c.getEmailList());
 			}
-		
-		}
-		
-		
-		
+		}	
 	}
 
-	public String[] searchByEmail()
+	public String searchByEmail()
 	{
+		Scanner sbem = new Scanner(System.in);
+		System.out.println("Enter email address");
+		int email = sbem.nextInt();
+		
+		for(Contact c: contacts)
+		{
+			demail = c.getEmailList();
+			for (String e: demail)
+			{
+				if (e.equals(email)
+				{
+				return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ "," + c.getPhoneList() + ","c.getEmailList());
+				}
+			}
+		}	
 
 	}
 
@@ -235,9 +246,12 @@ public class AddressBook
 		
 	}
 
-	public void deleteContactbyEN(int entry)
+	public void deleteContactbyPhone(long phoneNum)
 	{
-
+		for(Contact c: contacts)
+		{
+			c.deletePhone(phoneNum)
+		
 	}
 
 	public void deleteContactbyEmail(String email)
