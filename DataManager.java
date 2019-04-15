@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class DataManager
 {
-	private ArrayList <Contact> ContactList = new ArrayList<Contact>();
+	//private ArrayList <Contact> ContactList = new ArrayList<Contact>();
 	private String[] allInfo ;
+	//private ArrayList <User> userList; 
 
 	//Check if there exists a folder in directory
 	// specific Users folder ie Addressbook user && specific user folder ie James 
