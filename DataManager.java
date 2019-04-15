@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.*;
+import java.util.*;
 
 public class DataManager
 {
@@ -52,6 +54,28 @@ public class DataManager
 		catch(IOException error)
 		{
 			System.out.println("An error has occured.");
+		}
+	}
+
+	public void writeToFile(String data, String path)
+	{
+		File pathToFile = new File(path);
+
+		if (pathToFile.exists() == true)
+		{
+			pathToFile.format
+		}
+		else
+		{
+			final Formatter makeFile;
+			try
+			{
+				makeFile = new Formatter(pathToFile)
+			}
+			catch(Exception e)
+			{
+				System.out.println("An error has occured")
+			}
 		}
 	}
 
