@@ -108,13 +108,14 @@ public class DataManager
 				String[] contactData = contactInfo.split(",");
 				String firstN = contactData[0]; //needs to be string, string, gender, long
 				String lastN = contactData[1];
-				Gender gender = Gender.valueOf(contactData[2]);********
+				Gender gender = Gender.valueOf(contactData[2]).toUpperCase();
 				long dateOB = Long.parseLong(contactData[3]);
 				
 				//________________________
-				String[] phoneData = contactPhones.split(",");
-				/*char pType = phoneData[0].charAt(0);**********
-				long pNumber = Long.parseLong(phoneData[0][1]);*/
+				String[] phoneData = contactPhones.split(";");
+				String[] eachPhone = phoneData.split(",");
+				char pType = eachPhone[0].charAt(0);
+				long pNumber = Long.parseLong(eachPhone[1]);
 				//________________________
 				String[] emails = contactEmails.split(",");
 				//________________________
@@ -122,18 +123,18 @@ public class DataManager
 				eachContact.setAddress(contactAddress);
 				eachContact.setAlias(contactAlias);
 		
-				for(int i = 0; i< phoneData.length(); i++)
+				
+				for(String each: phoneData)
 				{
-		// i am thinking that each ph# stored in the file will begin with a character that represents the ph# type
-					char pType = phoneData[i].charAt(0); 
-					long pNumber = Long.parseLong(phoneData[i][1:]);
+					
+					String[] eachPhone = each.split(",");
+					char pType = each[0].charAt(0);
+					long pNumber = Long.parseLong(eachPhone[1]);
 					eachContact.addPhone(pType, pNumber);
 				}
 
 				for(int i = 0; i< emails.length(); i++ )
 				{
-					//int index = 0;
-					//eachContact.addEmail(emails[index]), index ++;
 					eachContact.addEmail(i);
 				}
 				
