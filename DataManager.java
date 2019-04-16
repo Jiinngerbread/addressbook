@@ -61,14 +61,16 @@ public class DataManager
 
       if(pathToFile != null)
 			{
-        if(checkUserFile(new File(pathForUser))){
+        if(checkUserFile(new File(pathForUser)))
+				{
           //user file exists
-          System.out.println("file exists");
+          //*System.out.println("file exists");
           this.fileForUser = createUserFile(pathForUser);
           // add more
-        }else{
+        }
+				else
+				{
           //user file don't exists
-
           this.fileForUser = createNewUserFile(pathForUser);
         }
       }
