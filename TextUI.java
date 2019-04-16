@@ -130,7 +130,17 @@ public class TextUI
 		switch
 		{
 			case 1:
-				AddressBook.searchByEntry();
+				System.out.println("Please input entry number of contact");
+				int entryNumber = sc.nextInt();
+
+				AddressBook.searchByEntry(entryNumber);
+				System.out.println("Would you like to make changes to this contact?");
+				String answer = sc.nextLine();
+
+				if(answer.toUpperCase().compareTo("Y") == 0)
+				{
+					subsubMenu_1();
+				}
 				//the method called will display the contact
 				// subsubMenu_1() can be called to further edit a contact
 			break;
