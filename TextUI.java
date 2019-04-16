@@ -1,5 +1,7 @@
 import java.util.*
-iport java.util.Scanner;
+import java.util.Scanner;
+import datamanger;
+import addressbook;
 
 public class TextUI
 {
@@ -25,7 +27,49 @@ public class TextUI
 	}
 
 
+	public void loginTerminal()
+	{
+		System.out.println("______________________________________________________________________________________________________");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|               Please indicate:                                                                      |");
+		System.out.println("|                      1 - Create new AddressBook User                                                |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                      2 - Login to Your AddressBook                                                  |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                            .      .        .                                        |");
+		System.out.println("|_____________________________________________________________________________________________________|");
+		System.out.println();
+		System.out.println();
 
+		Scanner loginR = new Scanner(System.in);
+		Int logOrCreate = loginR.nextInt();
+
+		switch(logOrCreate)
+		{
+			case 1:
+				System.out.println("Please input your Username: ");
+				String userName = loginR.nextLine();
+				System.out.println("Please input your Password: ");
+				String password = loginR.nextLine();
+				String dataToStrore = String( userName + "," + password );
+				
+				DataManager("UserCredentials")
+				
+				DataManager.writeToFile(dataToStrore, "DataManager\\Session\\UserCredentials.txt")
+				
+				DataManager(userName);
+			break;
+
+			case 2: userLogin();
+			break;
+
+			default: loginTerminal();
+		}
+	}
+
+
+	}
 	public void userLogin()
 	{
 		System.out.println("______________________________________________________________________________________________________");
@@ -298,37 +342,11 @@ public class TextUI
 	
 	}
 
-
-	/*public void subMenu_()
+	public static void main(String[] args)
 	{
-		System.out.println("______________________________________________________________________________________________________");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |") 
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |");
-		System.out.println("|                                                                                                     |") 
-		System.out.println("|                                                                                                     |");
-		System.out.println("|_____________________________________________________________________________________________________|");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-
-		AddressBook.add();
-		mainMenu();*/
+		onLaunch();
+		loginTerminal();
+	}
 }
 
 
