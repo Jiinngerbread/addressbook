@@ -23,73 +23,152 @@ import java.util.Scanner;
 public class DataManager
 {
 	private final String ABSOLUTEPATH = "datamanager\\Session\\";
-  private File fileForUser = null;
+  	private File fileForUser = null;
 
-	public DataManager(String username)
+  	/**
+  	* This constructor is used to create a file
+  	* @param nameOfFile allows for a file to be created based on the data passed in.
+  	*/
+	public DataManager(String nameOfFile)
+	{
 		File pathToFile = null;
 
-    try
+	    try
 		{
-	    pathToFile = new File(ABSOLUTEPATH);
-	    String pathForUser = "";
+		    pathToFile = new File(ABSOLUTEPATH);
+		    String pathForUser = "";
 
-	    if(checkDirectory(pathToFile))
+		    if(doesPathExist(pathToFile))
 			{
-	      //asking if file directory exists
-	      //*System.out.println("Directory exists");
-	        pathForUser = createUserFilePath(username);
+		       	pathForUser = createUserFileExt(nameOfFile);
 
-	        if(checkUserFile(new File(pathForUser))){
-	            //user path exists
-	            //*System.out.println("file exists");
-	          this.fileForUser = createUserFile(pathForUser);
-	            // add more
-	        }
-					else
-					{
-	            //user file don't exists
-	          this.fileForUser = createNewUserFile(userfilepath);
-	        }
-
-    }
-		else
-		{
-      //file path don't exists
-      //*System.out.println("Directory doesn't exists");
-      pathToFile = createDirectory(ABSOLUTEPATH);
-      pathForUser = createUserFilePath(username);
-
-      if(pathToFile != null)
-			{
-        if(checkUserFile(new File(pathForUser)))
-				{
-          //user file exists
-          //*System.out.println("file exists");
-          this.fileForUser = createUserFile(pathForUser);
-          // add more
-        }
+		       	if(doesUserFileExist(new File(pathForUser)))
+		       	{    
+		       		this.fileForUser = addFileForUser(pathForUser);
+		       	}
 				else
 				{
-          //user file don't exists
-          this.fileForUser = createNewUserFile(pathForUser);
-        }
-      }
-    }
-  }
-	catch (FileNotFoundException noFile)
-	{
-    System.out.println("No File exists.");
-    error.printStackTrace();
-  }
-	catch(IOException e)
-	{
-    System.out.println("ERROR!");
-    error.printStackTrace();
-  }
-  }
+		        	this.fileForUser = createNewFileForUser(userfilepath);
+		       	}	
+	    	}
+			else
+			{
+		      pathToFile = createPath(ABSOLUTEPATH);
+		      pathForUser = createUserFilePath(specificPath);
+
+		        if(pathToFile != null)
+				{
+			        if(doesUserFileExist(new File(pathForUser)))
+					{
+			          this.fileForUser = addFileForUser(pathForUser);
+			        }
+					else
+					{
+		          		this.fileForUser = createNewFileForUser(pathForUser);
+		        	}
+		      	}
+		    }
+		}
+		catch (FileNotFoundException noFile)
+		{
+	    	System.out.println("No File exists.");
+	    	error.printStackTrace();
+	    }
+		catch(IOException e)
+		{
+		    System.out.println("ERROR!");
+		    error.printStackTrace();
+	  	}
+	}
+
 
 	/**
-	* This allows for a User credentials to be verified by checking the file database for matching credentials
+	* This method is used by the DataManager constructor to check if a particular file path exists.
+	* @param obj Represents a file object that will be used to evaluate the if a path exists
+	* @return True if file path exists and false otherwise.
+	**/
+	private boolean doesPathExist(File obj) throws IOException{
+
+      return obj.exists();
+
+    }
+
+    /**
+    * Allows for the creation of a file path 
+    * @param path Represents the path where a file will be added.
+    * @return Adds a file to the path specified.
+    */
+    private File createPath(String path){
+      File fpath = new File (path);
+
+      if(fpath.mkdirs()){
+        return fpaths;
+      }
+      else
+      {
+        System.out.println("Unable to create directory");
+      }
+      return null;
+    }
+
+    /**
+    * Checks if for the presence of a file in a specified path
+    * @param obj represents an object representation of a file 
+    * @return true if the object exists in the path specified, false if not.
+    **/
+    private boolean doesUserFileExist(File obj)throws IOException{
+
+      return obj.exists();
+
+    }
+
+    /**
+    * Allows for the addition of the File to the path
+    * @param userPath allows for the literal file to be added to the path specified
+    * @return establishes the file in the path.
+	*/
+    private File addFileForUser(String userPath){
+
+      return new File(userPath);
+
+    }
+
+    /**
+    *
+    * @param uFilepath
+    * @return 
+    **/
+    private File createNewFileForUser(String uFilepath) throws IOException{
+
+      File newUserFP = new File(uFilepath);
+
+      if (newUserFP.createNewFile())
+      {
+        return newUserFP;
+      }
+      else
+      {
+        System.out.println("failed to create new file");
+
+      }
+
+      return null;
+
+    }
+
+    /**
+    * This method allows for the name of the file to be created with the .txt estension.
+    * @param username the parameter used to create the txt file with a given name.
+    * @return The formatted string to be used as file name.
+    **/
+    private String createUserFileExt(String username){
+
+      return ABSOLUTEPATH.concat(username).concat(".txt");
+
+    }
+
+	/**
+	* This allows for a User credentials to be verified by checking the User Credentials database for matching data.
 	* @param username Captures the username of the User trying to log into the AddressBook system
 	* @param password Captures the password of the User trying to log into the AddressBook system
 	**/
@@ -126,37 +205,58 @@ public class DataManager
 	}
 
 	/**
-	* When called allows for a file to be written to
-	*
+	* When called allows for a file to be written to the default file path
+	* @param data captures information to be written to a file
 	*
 	**/
-	public void writeToFile(String data, String path)
+	public void writeToFile(String data)
 	{
+		FileWriter fr = null;
+		BufferedWriter br = null;
 		File pathToFile = new File(path);
+		try
+		{
+			fr = new FileWriter(fileForUser, true);
+			br = new BufferedWriter(fr);
 
-		if (pathToFile.exists() == true)
-		{
-			pathToFile.format
+			br.newLine();
+			br.newLine();
+			br.write(data);
 		}
-		else
+		catch(FileNotFoundException fnfErr)
 		{
-			final Formatter makeFile;
+			System.out.println("There is no file to write to.");
+			fnfErr.printStackTrace();
+		}
+		catch(IOException error)
+		{
+			System.out.println("ERROR!");
+			error.printStackTrace();
+		}
+		final
+		{
 			try
 			{
-				makeFile = new Formatter(pathToFile)
+				br.close();
+				fr.close();
 			}
-			catch(Exception e)
+			catch(IOException writerError)
 			{
-				System.out.println("An error has occured")
+				writerError.printStackTrace();
 			}
 		}
 	}
 
-	public ArrayList<Contacts> readFile(String username)
+	/**
+	* Method is being used to read a contact file to capture information about all contacts in a given User's Addressbook
+	* @param filename Used to find a given contact's addressbook file
+	* @return Will generate a list of contacts based on the data stored in the AddressBook.
+	**/
+	public ArrayList<Contacts> readContactFile(String filename)
 	{
 		try
 		{
-			String filename = username+"_addressbook.txt"
+			String filename = createUserFileExt(filename)
 			FileReader fr = new FileReader(filename);
 			BufferedReader br = new BufferedReader(fr);
 
@@ -217,12 +317,26 @@ public class DataManager
 		catch(IOException error)
 		{
 			System.out.println("An error has occured.");
+			error.printStackTrace();
 		}
 
 		catch(NumberFormatException hasTobeNumError)
 		{
 			System.out.println("NOTE: the input has to be a number.");
 		}
+		finally
+		{
+			try
+			{
+				fr.close();
+				br.close();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 
