@@ -17,19 +17,35 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 	private DataManager data;
 	private String username;
 
+	/**
+	* Allows for the reading of a specific Users contact file
+	* @param userName capturs the contacts UserName which is used to get their AddressBook; Contacts are retrieved and stored into a list.
+	*
+	*/
 	public AddressBook(String userName)
 	{
 		this.username = userName;
-		data = new DataManager();
+		//data = new DataManager();
 		this.contacts = DataManager.readFile(username);
 	}
 
+	/**
+	* Allows for a contact to be created and added to the list of contacts
+	* Only the default parameters are captured.
+	* @param firstName Holds the first name of a given contact. 
+	* @param lastName Holds the last name of a given contact.
+	* @param gender Captures the gender of the contact.
+	* @param dob Captures the date of birthof the contact.
+	*
+	**/
 	public void add(String firstName, String lastName, Gender gender, long dob)
 	{
 		Contact newC = new Contact(firstName, lastName, gender, dob);
 		contacts.add(newC);
 	}
-
+	/**
+	* Allows for a contact to be created through input from the user, then the data for the contact is added to a list of contacts
+	**/
 	public void add()
 	{
 		Scanner add = new Scanner(System.in);
@@ -132,6 +148,10 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 		System.out.println("Contact Added!");
 	}
 
+	/**
+	* Monitors the User Login interface for verified users and ensuring that unauthorized user does not gain access the system.
+	*
+	**/
 	public void statusToLaunch()
 	{
 		int numtries=0;
@@ -147,7 +167,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			if(DataManager.Authenticate(userN, passW) == true)
 			{
 				AddressBook activeUserAB = new AddressBook(userN);
-				mainMenu();	
+				//mainMenu();	
 			} else
 			{
 				System.out.println("Username or password is incorrect, you have two more tries");
@@ -158,86 +178,181 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 		System.exit(0);
 	}
 
+	/**
+	* Provides a means of accessing different Main Menu options within the TextUI
+	*
+	**/
 	public void mainMenuNavigation()
 	{
 		Scanner capture = new Scanner(System.in);
-		String letter = capture.nextLine().toUpperCase();
-
-		while (!letter.equals("F")) 
+		char letter = capture.nextLine().charAt().toUpperCase();
+		
+		while(!letter.equals("F"))
 		{
-			if (letter.equals("A")) 
-			{	
-				return subMenu_A();
-			} 
-				 	
-			else if (letter.equals("B")) 
+			switch(letter)
 			{
-				return subMenu_B();			 	
-			} 
-
-			else if (letter.equals("C")) 
-			{
-				return subMenu_C();
-			}
-			else if(letter.equals("D"))
-			{
-				return subMenu_D();
-			}
-			else(letter.equals("E"))
-			{
-				return subMenu_E();
-		 	}
-		System.out.println("A - Create a contact\nB - Search\nC - View Contacts\nD - Delete a contact\nE - Save AddressBook to file" );
-		letter = capture.nextLine();
+				case "A" : subMenu_A();
+					break;	
+				case "B": subMenu_B();			 	
+					break; 
+				case "C": subMenu_C();
+					break;
+				case "D": subMenu_D();
+					break;
+				case "E": subMenu_E();
+					break;
+				default:
+					System.out.println("A - Create a contact\nB - Search\nC - View Contacts\nD - Delete a contact\nE - Save AddressBook to file" );
+					letter = capture.nextLine();
 		}   
 		subMenu_F();
 		System.exit();
+		}
 	}
-
+	
+	/*
+	* Allows for a contact's Alias to be updated.
+	*@param newAlias takes in the new Alias that the contact will now have
+	*
+	*
 	public void changeAlias(String newAlias)
 	{
 		newC.getAlias() = newAlias;
 	}
-	public void changeAddress(String newAdd)
+	*/
+
+	/**
+	* Allows for a contact's Alias to be updated.
+	* @param oldAlias takes in the old Alias belonging to the contact to be modified
+	* @param newAlias takes in the new Alias that the contact will now have
+	*
+	**/
+	public void changeAlias(String oldAlias, String newAlias)
+	{	
+
+		for(int i = 0; i < contacts.size(); i++)
+		{
+			if(i.getAlias().equals(newAlias))
+			{
+				System.out.println("The Alias must be unique. This Alias already exist.")
+			}
+			else
+			{
+				if(i.getAlias.equals(oldAlias))
+				{
+					i.setAlias(newAlias);
+					System.out.println("Alias has been updated");
+				}
+				else
+				{
+					System.out.println("No such user Exists with that Alias.")
+				}
+			}
+		}
+	}
+
+	/*public void changeAddress(String newAdd)
 	{
 		newC.getAddress() = newC.setAddress(newAdd);
+	}*/
+
+	public void changeLastName(String firstname, String lastname, String newLastName)
+	{
+		for(int i = 0; i < contacts.size(); i++)
+		{
+			String[] name = i.getName().split(",");
+			String last = name[1];
+			String first = name[0];
+			if(last.equals(current) && first.equals(firstname))
+			{
+				i.changeLastName(newLastName);
+				System.out.println("Successfully updated Lastname for " + i.getName());
+			}
+			else
+			{
+				System.out.println("No such user Exists with that first and lastname.")
+			}
+		}
+	}
+	
+	public void changeAddress(String identifier, String newAdd)
+	{
+		for(int i = 0; i < contacts.size(); i++)
+		{
+			if(identifier.equals(i.getAlias))
+			{
+				i.setAddress(newAdd);
+				System.out.println("Successfully updated address for " + i.super.getName());
+			}
+			else
+			{
+				System.out.println("No such user Exists with that first and lastname.")
+			}
+		}
 	}
 
 	public String searchByEntry(int number)
 	{
-		Scanner sben = new Scanner(System.in);
-		System.out.println("Enter entry number");
-		int entryNum = sben.nextInt();
-		
 		for(Contact c: contacts)
 		{
-			if (c.getEntry().equals(entryNum))
+			if (c.getEntry().equals(number))
 			{
+				//To flatten out the Address which is a String[]
+				for(String AddressLine: c.getAddress())
+				{
+					String flatAddress = String.join(" ", AddressLine);  
+				}
 
-			return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ "," + c.getPhoneList() + ","c.getEmailList());
+				for(Phone each: c.getPhoneList())
+				{
+					String flatPhone = String.join(" , ", each.toString());
+				}
 
+				for(Contact email: c.getEmailList())
+				{
+					String flatEmail = String.join(" , ", email);
+				}
+
+				
+				return c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + ", " + c.getAlias()+ ", "+ flatAddress+ ", " + flatPhone + ", " + flatEmail;
 			}
 		}	
 	}
 
-	public String searchByEmail()
+	public String searchByEmail(String email)
 	{
-		Scanner sbem = new Scanner(System.in);
-		System.out.println("Enter email address");
-		int email = sbem.nextLine();
 		
 		for(Contact c: contacts)
 		{
-			demail = c.getEmailList();
+			String[] demail = c.getEmailList();
 			for (String e: demail)
 			{
-				if (e.equals(email)
+				if (e.equals(email))
 				{
-				return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ "," + c.getPhoneList() + ","c.getEmailList());
+					//To flatten out the Address which is a String[]
+					for(String AddressLine: c.getAddress())
+					{
+						String flatAddress = String.join(";", AddressLine);  
+					}
+
+					for(Phone each: c.getPhoneList())
+					{
+						String flatPhone = String.join(", ", each.toString());
+					}
+
+					for(Contact email: c.getEmailList())
+					{
+						String flatEmail = String.join(", ", email);
+					}
+					
+					return c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + ", " + c.getAlias()+ ", "+ flatAddress + ", "+ flatPhone + ", " + flatEmail;
+				}
+				else
+				{
+					return "No such contact exists with that email!";
 				}
 			}
 		}	
-
 	}
 
 	public ArrayList<Contact> sortAllByEntry()
@@ -250,9 +365,28 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 		return Collections.sort(contacts, new ComparebyName())
 	}
 
-	public void deletePhone(long phoneNum)
+	public void deletePhone(String first1, String last1, long phoneNum)
 	{
-		String s= searchByEntry();
+		
+
+		for(int i = 0; i < contacts.size(); i++)
+		{
+			String[] name = i.getName().split(",");
+			String last = name[1];
+			String first = name[0];
+			if(last.equals(last1) && first.equals(first1))
+			{
+				i.deletePhone(phoneNum);
+				System.out.println("Phone number has been deleted for " + i.getName());
+			}
+			else
+			{
+				System.out.println("No such user exists with that name.")
+			}
+		}
+
+		
+		/*String s= searchByEntry();
 		String[] useful = s.split(,);
 		int entryNum = useful[0];
 		for (int c=0 ;c< contacts.length(); i++)
@@ -261,12 +395,27 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			{
 				c.deletePhone();
 			}
-		}
+		}*/
 	}
 
-	public void deleteEmail(String email)
+	public void deleteEmail(String first2, String last2, String email)
 	{
-		
+		for(int i = 0; i < contacts.size(); i++)
+		{
+			String[] name = i.getName().split(",");
+			String last = name[1];
+			String first = name[0];
+			if(last.equals(last2) && first.equals(first2))
+			{
+				i.deleteEmail(phoneNum);
+				System.out.println("The following email, " + email + " has been deleted for " + i.getName());
+			}
+			else
+			{
+				System.out.println("No such user exists with that name.")
+			}
+		}
+		/*
 		String s= searchByEntry();
 		String[] useful = s.split(,);
 		int entryNum = useful[0];
@@ -276,7 +425,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			{
 				c.deleteEmail();
 			}
-		}
+		}*/
 	}
 	
 	public void deleteContactbyEntry()
@@ -291,7 +440,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			{
 				delCon = c;
 			}
-		{
+		}
 		return contacts.remove(c);
 	}
 
@@ -308,58 +457,65 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			{
 				delCon = c;
 			}
-		{
+		}
 		return contacts.remove(c);
 	
 	
 	}
 	public void saveToFile()
 	{
-		
+		for(int i = 0; i<contact.size(); i++)
+		{
+			String entry = i.getEntry();
+			String alias = i.getAlias();
+			String name = i.getName();
+			String gender = i.super.getGender().valueOf();
+			//String 
+		}
 	}
 
  	public void subsubNavigationMenu()
  	{
     	Scanner optionEdit = new Scanner(System.in);
-		String editChoice = optionEdit.nextLine().toUpperCase();
+		char editChoice = optionEdit.charAt().toUpperCase();
 
-		while (!editChoice.equals("X")) 
+		switch(editChoice)
 		{
-			if (editChoice.equals("A")) 
-			{	
+			case 'A':	
 				Scanner subsubChangeLN = new Scanner(System.in);
-			 	System.out.println("Please input the new Alias");
+			 	System.out.println("Please input the name of the contact whose last name you would like to change, firstname, lastname, then the new lastname");
+			 	String currentFN = subsubChangeLN.nextLine();
+			 	String currentLN = subsubChangeLN.nextLine();
 			 	String newLastN = subsubChangeLN.nextLine();
 			 
 				
-				newc.updateName(newLastN);
-				//can i call the contact object here 
-				System.out.println("Successfully updated Lastname");
+				updateName(currentFN, currentLN, newLastN);
+				
 		 		subsubChangeLN.close();
-		 	} 
+		 	break;
 		 	
-		 	else if (editChoice.equals("B")) 
-		 	{
+		 	case 'B':
 			 	Scanner subsubAlias = new Scanner(System.in);
-			 	System.out.println("Please input the new Alias");
+			 	System.out.println("Please input the old Alias of the contact you wpuld like to edit, then the new Alias");
+			 	String oldalias = subsubAlias.nextLine();
 			 	String newAlias = subsubAlias.nextLine();
 			 	
-			 	newC.changeAlias(newAlias);
+			 	changeAlias(oldalias, newAlias);
 			 	System.out.println("Successfully updated Alias");			 	
 				subsubAlias.close();
-			} 
+			break;
 
-			else if (editChoice.equals("C")) 
-			{
+			case 'C':
 		 		Scanner subsubAddress = new Scanner(System.in);
-			 	System.out.println("Please input the new Address, each line separated by ';'. ");
+			 	System.out.println("Please input the Alias for the contact whose address you wish to change");
+			 	String contactalias = subsubAddress.nextLine();
+			 	System.out.println("Please enter the new Address in one line, noting that each new line is indicated by a semicolon: ';'. ");
 			 	String newAdd = subsubAddress.nextLine();
-			 	newC.changeAddress(newAdd);
-			 	System.out.println("Successfully updated Address");
+			 	changeAddress(contactalias, newAdd);
 				subsubAddress.close();
-			}
-		 	else if(editChoice.equals("D"))
-		 	{
+			break;
+
+			case 'D':
 		 		Scanner subsubAddPhone = new Scanner(System.in);
 			 	System.out.println("Please input the type of Phone; M- mobile, W- Work, H- Home: ");
 			 	Char newPhonetype = subsubAddPhone.next().charAt(0);
@@ -396,9 +552,9 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 					while(response3.toUpperCase().compareTo("Y")== 0);
 				}*/
 				subsubAddPhone.close();
-		 	}
-		 	else if(editChoice.equals("E"))
-		 	{
+			break;
+
+		 	case 'E';
 		 		Scanner subsubAddEmail = new Scanner(System.in);
 			 	System.out.println("Please input the new Email");
 			 	String newEmail = subsubAddEmail.nextLine();
@@ -424,19 +580,24 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 					while(response5.toUpperCase().compareTo("Y")== 0);
 				}*/
 				subsubAddEmail.close();
-		 	}
-		 	else if(editChoice.equals("F"))
-		 	{
+			break;
+
+		 	case 'F':
 		 		Scanner subsubDeletePh = new Scanner(System.in);
-			 	System.out.println("Please input the number you want to delete");
+		 		System.out.println("Please input the first and last name of the contact whos phone number you wish to delete");
+			 	System.out.println("Firstname: ");
+			 	String firstN = sc.nextLine();
+			 	System.out.println("Lastname: "); 
+			 	String lastN = sc.nextLine();
+			 	System.out.println("Please input the phone number you would like removed for this Contact: ");
 			 	Long phoneToDelete = Long.parseLong(subsubDeletePh.nextLine()); 
 			 	
-			 	newC.deletePhone(phoneToDelete);
-			 	System.out.println("Phone number has been deleted.");
+			 	deletePhone(firstN, lastN, phoneToDelete);
+			 	
 			 	subsubDeletePh.close();
-		 	}
-		 	else if(editChoice.equals("G"))
-		 	{
+			break;
+		 	
+		 	case 'G':
 		 		Scanner subsubDeleteEmail = new Scanner(System.in);
 			 	System.out.println("Please input the email you want to delete");
 			 	String emailToDelete = subsubDeleteEmail.nextLine(); 
@@ -444,9 +605,11 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			 	newC.deletePhone(emailToDelete);
 			 	System.out.println("Email  has been deleted.");
 			 	subsubDeleteEmail.close(); 
-		 	}
-		 	System.out.println("A - Change lastname\nB - Change Alias\nC - Change Address\nD - Add Phone Number \nE - Add Email Address\nF - Delete Phone Number\n G - Delete Email Address\nH - Delete contact from AddressBook\nX - Return to Main Menu" );
-			editChoice = optionEdit.nextLine().toUpperCase();
-		}	 	
+			break;
+			default: 
+				System.out.println("A - Change lastname\nB - Change Alias\nC - Change Address\nD - Add Phone Number \nE - Add Email Address\nF - Delete Phone Number\n G - Delete Email Address\nH - Delete contact from AddressBook\nX - Return to Main Menu" );
+				editChoice = optionEdit.nextLine().toUpperCase();
+
+		}
 	}
 }
