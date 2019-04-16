@@ -73,7 +73,7 @@ public class AddressBook
 			System.out.println("Would you like to add a phone number? 'Y' for yes, 'N' for no.");
 			response = add.nextLine();
 			
-		}
+		
 		/*System.out.println("Phone type, ie M - Mobile, W - Work, H- Home");
 		char type = add.next().charAt(0);
 
@@ -201,17 +201,17 @@ public class AddressBook
 		newC.getAddress() = newC.setAddress(newAdd);
 	}
 
-	public String searchByEntry()
+	public String searchByEntry(int number)
 	{
-		Scanner sben = new Scanner(System.in);
-		System.out.println("Enter entry number");
-		int entryNum = sben.nextInt();
+		//Scanner sben = new Scanner(System.in);
+		//System.out.println("Enter entry number");
+		//int entryNum = sben.nextInt();
 		
 		for(Contact c: contacts)
 		{
-			if (c.getEntry().equals(entryNum)
+			if (c.getEntry().equals(entryNum))
 			{
-			return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ "," + c.getPhoneList() + ","c.getEmailList());
+				return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ c.getPhoneList() + ","c.getEmailList());
 			}
 		}	
 	}
