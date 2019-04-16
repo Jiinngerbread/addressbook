@@ -1,3 +1,5 @@
+package contact;
+
 import java.util.*
 import java.util.Scanner;
 import datamanger;
@@ -106,6 +108,10 @@ public class TextUI
 		System.out.println("|                                                                                                     |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("|   E - Save AddressBook to File                                                                      |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|                                                                                                     |");
+		System.out.println("|   N - See Next Menu                                                                                 |");
+		System.out.println("|                                                                                                     |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("|                                                                                                     |");
 		System.out.println("|   F - EXIT                                                                                          |");
