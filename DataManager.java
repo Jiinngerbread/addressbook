@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.lang.*;
 import java.util.*;
 
+/**
+* This class allows for the interaction of the Addressbook and User classes with their respective files. 
+* @author Jheanel Brown and Esther E
+* @version 1.0
+*/
 public class DataManager
 {
 	private ArrayList <Contact> ContactList = new ArrayList<Contact>();
@@ -26,6 +31,12 @@ public class DataManager
 	// we want to write to the file 
 
 	//we want to edit the file /manipulate the file 
+
+	/**
+	* This allows for a User credentials to be verified by checking the file database for matching credentials
+	* @param username Captures the username of the User trying to log into the AddressBook system
+	* @param password Captures the password of the User trying to log into the AddressBook system
+	**/
 	public boolean Authenticate(String username, String password)
 	{
 		try 
@@ -58,6 +69,11 @@ public class DataManager
 		}
 	}
 
+	/**
+	* When called allows for a file to be written to
+	* 
+	*
+	**/
 	public void writeToFile(String data, String path)
 	{
 		File pathToFile = new File(path);
