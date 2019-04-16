@@ -1,6 +1,7 @@
 //package contact;
 
 import java.util.*;
+java.util.ArrayList class;
 import java.Scanner;
 
 
@@ -222,7 +223,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 	{
 		Scanner sbem = new Scanner(System.in);
 		System.out.println("Enter email address");
-		int email = sbem.nextInt();
+		int email = sbem.nextLine();
 		
 		for(Contact c: contacts)
 		{
@@ -238,14 +239,14 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 
 	}
 
-	public ArralList<Contact> sortAllByEntry()
+	public ArrayList<Contact> sortAllByEntry()
 	{
-		
+		return Collections.sort(contacts, new ComparebyEntryNum());
 	}
 
-	public ArralList<Contact> sortAllByName()
+	public ArrayList<Contact> sortAllByName()
 	{
-		
+		return Collections.sort(contacts, new ComparebyName())
 	}
 
 	public void deletePhone(long phoneNum)
@@ -279,22 +280,35 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 	
 	public void deleteContactbyEntry()
 	{
-		Scanner sben = new Scanner(System.in);
+		Scanner dce = new Scanner(System.in);
 		System.out.println("Enter entry number");
-		int entryNum = sben.nextInt();
-		delCon;
+		int entryNum = dce.nextInt();
+		Contact delCon;
 		for(Contact c: contacts)
 		{
 			if (c.getEntry().equals(entryNum))
 			{
-				
+				delCon = c;
 			}
 		{
+		return contacts.remove(c);
 	}
 
 	public void deleteContactbyEmail()
 	{
-	
+		Scanner dcem = new Scanner(System.in);
+		System.out.println("Enter email address");
+		String entryNum = dcem.nextLine();
+		Contact delCon;
+		for(Contact c: contacts)
+		{
+			emails = c.getEmailList();
+			if (c.getEntry().equals(entryNum))
+			{
+				delCon = c;
+			}
+		{
+		return contacts.remove(c);
 	
 	
 	}
