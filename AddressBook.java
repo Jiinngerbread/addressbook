@@ -1,4 +1,4 @@
-//package contact;
+package contact;
 
 import java.util.*;
 java.util.ArrayList class;
@@ -192,21 +192,23 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 		{
 			switch(letter)
 			{
-				case "A" : subMenu_A();
+				case 'A' : TextUI.subMenu_A();
 					break;	
-				case "B": subMenu_B();			 	
+				case 'B': TextUI.subMenu_B();			 	
 					break; 
-				case "C": subMenu_C();
+				case 'C': TextUI.subMenu_C();
 					break;
-				case "D": subMenu_D();
+				case 'D': TextUI.subMenu_D();
 					break;
-				case "E": subMenu_E();
+				case 'E': TextUI.subMenu_E();
+					break;
+				case 'N': TextUI.subsubMenu_1();
 					break;
 				default:
 					System.out.println("A - Create a contact\nB - Search\nC - View Contacts\nD - Delete a contact\nE - Save AddressBook to file" );
 					letter = capture.nextLine();
 		}   
-		subMenu_F();
+		TextUI.subMenu_F();
 		System.exit();
 		}
 	}
