@@ -203,9 +203,9 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 
 	public String searchByEntry(int number)
 	{
-		//Scanner sben = new Scanner(System.in);
-		//System.out.println("Enter entry number");
-		//int entryNum = sben.nextInt();
+		Scanner sben = new Scanner(System.in);
+		System.out.println("Enter entry number");
+		int entryNum = sben.nextInt();
 		
 		for(Contact c: contacts)
 		{
@@ -240,7 +240,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 
 	public ArralList<Contact> sortAllByEntry()
 	{
-
+		
 	}
 
 	public ArralList<Contact> sortAllByName()
@@ -248,28 +248,56 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 		
 	}
 
-	public void deleteContactbyPhone(long phoneNum)
+	public void deletePhone(long phoneNum)
 	{
 		String s= searchByEntry();
 		String[] useful = s.split(,);
 		int entryNum = useful[0];
 		for (int c=0 ;c< contacts.length(); i++)
 		{
-			if(c getEntry().equals(entryNum))
+			if(contact[c].getEntry().equals(entryNum))
 			{
 				c.deletePhone();
 			}
 		}
 	}
 
-	public void deleteContactbyEmail(String email)
+	public void deleteEmail(String email)
 	{
-		for (Contact c: Contacts)
+		
+		String s= searchByEntry();
+		String[] useful = s.split(,);
+		int entryNum = useful[0];
+		for (int c=0 ;c< contacts.length(); i++)
 		{
-			c.deleteEmail;
+			if(contacts[c].getEntry().equals(entryNum))
+			{
+				c.deleteEmail();
+			}
 		}
 	}
+	
+	public void deleteContactbyEntry()
+	{
+		Scanner sben = new Scanner(System.in);
+		System.out.println("Enter entry number");
+		int entryNum = sben.nextInt();
+		delCon;
+		for(Contact c: contacts)
+		{
+			if (c.getEntry().equals(entryNum))
+			{
+				
+			}
+		{
+	}
 
+	public void deleteContactbyEmail()
+	{
+	
+	
+	
+	}
 	public void saveToFile()
 	{
 		
