@@ -1,9 +1,9 @@
 package contact;
 
 import java.util.*;
-java.util.ArrayList class;
+import java.util.ArrayList;
 import java.Scanner;
-import datamanager;
+import contact.datamanager.DataManager;
 
 
 /**
