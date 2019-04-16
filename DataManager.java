@@ -1,6 +1,4 @@
-import java.lang.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+package datamanager;
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,8 +7,12 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.lang.*;
 import java.nio.file.*;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 
 /**
@@ -20,8 +22,69 @@ import java.nio.file.Files;
 */
 public class DataManager
 {
-	private ArrayList <Contact> ContactList = new ArrayList<Contact>();
-	private String[] allInfo ;
+	private final String ABSOLUTEPATH = "datamanager\\Session\\";
+  private File fileForUser = null;
+
+	public DataManager(String username)
+		File pathToFile = null;
+
+    try
+		{
+	    pathToFile = new File(ABSOLUTEPATH);
+	    String pathForUser = "";
+
+	    if(checkDirectory(pathToFile))
+			{
+	      //asking if file directory exists
+	      //*System.out.println("Directory exists");
+	        pathForUser = createUserFilePath(username);
+
+	        if(checkUserFile(new File(pathForUser))){
+	            //user path exists
+	            //*System.out.println("file exists");
+	          this.fileForUser = createUserFile(pathForUser);
+	            // add more
+	        }
+					else
+					{
+	            //user file don't exists
+	          this.fileForUser = createNewUserFile(userfilepath);
+	        }
+
+    }
+		else
+		{
+      //file path don't exists
+      //*System.out.println("Directory doesn't exists");
+      pathToFile = createDirectory(ABSOLUTEPATH);
+      pathForUser = createUserFilePath(username);
+
+      if(pathToFile != null)
+			{
+        if(checkUserFile(new File(pathForUser))){
+          //user file exists
+          System.out.println("file exists");
+          this.fileForUser = createUserFile(pathForUser);
+          // add more
+        }else{
+          //user file don't exists
+
+          this.fileForUser = createNewUserFile(pathForUser);
+        }
+      }
+    }
+  }
+	catch (FileNotFoundException noFile)
+	{
+    System.out.println("No File exists.");
+    error.printStackTrace();
+  }
+	catch(IOException e)
+	{
+    System.out.println("ERROR!");
+    error.printStackTrace();
+  }
+  }
 
 	/**
 	* This allows for a User credentials to be verified by checking the file database for matching credentials
