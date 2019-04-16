@@ -25,7 +25,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 	public AddressBook(String userName)
 	{
 		this.username = userName;
-		//data = new DataManager();
+		data = new DataManager(username);
 		this.contacts = DataManager.readFile(username);
 	}
 
@@ -441,7 +441,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 				delCon = c;
 			}
 		}
-		return contacts.remove(c);
+		contacts.remove(c);
 	}
 
 	public void deleteContactbyEmail()
@@ -458,7 +458,7 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 				delCon = c;
 			}
 		}
-		return contacts.remove(c);
+		contacts.remove(c);
 	
 	
 	}
@@ -466,11 +466,28 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 	{
 		for(int i = 0; i<contact.size(); i++)
 		{
-			String entry = i.getEntry();
+			//String entry = i.getEntry();
 			String alias = i.getAlias();
 			String name = i.getName();
-			String gender = i.super.getGender().valueOf();
-			//String 
+			String gender =  String.valueOf(i.getGender());
+			String dateOB = String.valueOf(i.super.getDOB());
+
+			for(String AddressLine: i.getAddress())
+			{
+				String flatAddress = String.join(";", AddressLine);  
+			}
+
+			for(Phone each: i.getPhoneList())
+			{
+				String flatPhone = String.join(",", each.toString());
+			}
+
+			for(Contact email: i.getEmailList())
+			{
+				String flatEmail = String.join(",", email);
+			}
+			//DataManager(this.username);
+			data.writeToFile(alias+"\\" + name + "," + gender + "," + dateOB + "\\" + flatAddress + "\\" + flatPhone + "\\" + flatEmail );	
 		}
 	}
 
