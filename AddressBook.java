@@ -9,7 +9,7 @@ import java.Scanner;
 * @author Jheanel Brown && Esther E
 * @version 1.0
 */
-public class AddressBook 
+public class AddressBook implements Comparable<Contact> implements Comparator<Contact>
 {
 	private ArrayList<Contact> contacts;
 	private DataManager data;
@@ -211,7 +211,9 @@ public class AddressBook
 		{
 			if (c.getEntry().equals(entryNum))
 			{
-				return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ ","+ c.getPhoneList() + ","c.getEmailList());
+
+			return(c.getEntry() + ", " + c.getName()+ ", " + c.super.getGender() + "," + c.getAlias()+ ","+c.getAddress()+ "," + c.getPhoneList() + ","c.getEmailList());
+
 			}
 		}	
 	}
@@ -248,15 +250,24 @@ public class AddressBook
 
 	public void deleteContactbyPhone(long phoneNum)
 	{
-		for(Contact c: contacts)
+		String s= searchByEntry();
+		String[] useful = s.split(,);
+		int entryNum = useful[0];
+		for (int c=0 ;c< contacts.length(); i++)
 		{
-			c.deletePhone(phoneNum)
-		
+			if(c getEntry().equals(entryNum))
+			{
+				c.deletePhone();
+			}
+		}
 	}
 
 	public void deleteContactbyEmail(String email)
 	{
-		
+		for (Contact c: Contacts)
+		{
+			c.deleteEmail;
+		}
 	}
 
 	public void saveToFile()
