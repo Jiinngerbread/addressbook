@@ -1,4 +1,4 @@
-public class ComparebyEntryNum implements Comparator<Contact>
+public class ComparebyName implements Comparator<Contact>
 
 {
   public int compare(Contact con1, Contact con2)
