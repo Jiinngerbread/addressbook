@@ -9,7 +9,7 @@ import java.Scanner;
 * @author Jheanel Brown && Esther E
 * @version 1.0
 */
-public class AddressBook 
+public class AddressBook implements Comparable<Contact> implements Comparator<Contact>
 {
 	private ArrayList<Contact> contacts;
 	private DataManager data;
