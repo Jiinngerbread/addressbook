@@ -1,4 +1,4 @@
-package datamanager;
+package contact.datamanager;
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
