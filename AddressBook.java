@@ -167,11 +167,12 @@ public class AddressBook implements Comparable<Contact> implements Comparator<Co
 			if(DataManager.Authenticate(userN, passW) == true)
 			{
 				AddressBook activeUserAB = new AddressBook(userN);
-				//mainMenu();	
+				TextUI.mainMenu();
+				break;	
 			} else
 			{
-				System.out.println("Username or password is incorrect, you have two more tries");
 				numtries++;
+				System.out.println("Username or password is incorrect, you have " + numtries +"/3 tries left.");
 			}
 		}
 		System.out.println("You have exceeded your number of tries, Goodbye");
