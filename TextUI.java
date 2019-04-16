@@ -134,23 +134,18 @@ public class TextUI
 				int entryNumber = sc.nextInt();
 
 				AddressBook.searchByEntry(entryNumber);
-				System.out.println("Would you like to make changes to this contact?");
-				String answer = sc.nextLine();
-
-				if(answer.toUpperCase().compareTo("Y") == 0)
-				{
-					subsubMenu_1();
-				}
-				//the method called will display the contact
-				// subsubMenu_1() can be called to further edit a contact
+			
 			break;
 			case 2: 
-				AddressBook.searchByEmail();
-				// subsubMenu_1() to further edit a contact
+				System.out.println("Please input the email address for the contact whose details you would like to see: ");
+				String email = sc.nextLine();
+				AddressBook.searchByEmail(email);
+				
 			break;
 			default:
-			System.out.println("Input invalid!");
-			mainMenu()
+			System.out.println("Input invalid! Only 1 or 2 are acceptable inputs!");
+			subMenu_B();
+			//mainMenu()
 		}
 		mainMenu();
 	}
@@ -207,7 +202,7 @@ public class TextUI
 		System.out.println("|     E - Add Email Address                                                      |"); 
 		System.out.println("|     F - Delete Phone Number                                                    |");
 		System.out.println("|     G - Delete Email Address                                                   |");
-		System.out.println("|     X - Return to Main Menu                                                    |");
+		System.out.println("|     X - Back                                                                   |");
 		System.out.println("|                                                                                |");
 		System.out.println("|________________________________________________________________________________|");
 		System.out.println();
@@ -243,7 +238,7 @@ public class TextUI
 		Scanner sc5 = new Scanner(System.in);
 		System.out.println("Input 1 to search for a contact by entry number or 2 to search by email: ");
 		int searchBy = sc5.nextInt();
-		switch
+		switch(searchBy)
 		{
 			case 1:
 				String delByEN = sc5.nextLine();
