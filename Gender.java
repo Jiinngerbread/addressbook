@@ -1,4 +1,4 @@
-//package contact;
+package contact;
 
 /**
 * Enum for gender assignment.
