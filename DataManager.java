@@ -209,6 +209,49 @@ public class DataManager
 	* @param data captures information to be written to a file
 	*
 	**/
+	public void writeToFile(String data, String where)
+	{
+		FileWriter fr = null;
+		BufferedWriter br = null;
+		File pathToFile = new File(where);
+		try
+		{
+			fr = new FileWriter(where, true);
+			br = new BufferedWriter(fr);
+
+			br.newLine();
+			br.newLine();
+			br.write(data);
+		}
+		catch(FileNotFoundException fnfErr)
+		{
+			System.out.println("There is no file to write to.");
+			fnfErr.printStackTrace();
+		}
+		catch(IOException error)
+		{
+			System.out.println("ERROR!");
+			error.printStackTrace();
+		}
+		final
+		{
+			try
+			{
+				br.close();
+				fr.close();
+			}
+			catch(IOException writerError)
+			{
+				writerError.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	* When called allows for a file to be written to the default file path
+	* @param data captures information to be written to a file
+	*
+	**/
 	public void writeToFile(String data)
 	{
 		FileWriter fr = null;
