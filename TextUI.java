@@ -2,15 +2,16 @@ package contact;
 
 import java.util.*
 import java.util.Scanner;
-import datamanger;
-import addressbook;
+import contact.datamanager.DataManger;
+import contact.AddressBook;
+import contact.User;
 
 public class TextUI
 {
-	public TextUI()
-	{
+	//public TextUI()
+	//{
 
-	}
+	//}
 		
 	//create a main method for stepwise launch of the interface	
 	public void onLaunch()
