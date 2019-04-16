@@ -206,7 +206,7 @@ public class Contact extends Person
 		return tempPhoneList;
 	}
 
-	public String toString
+	public String toString()
 	{
 		return (getEntry() + ", " + getName()+ ", " + super.getGender() + ", " + getAlias()+ "," + getEmailList());
 	}
