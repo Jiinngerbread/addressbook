@@ -1,4 +1,9 @@
+package contact;
+
 import java.util.*;
+import java.lang.*;
+import contact.datamanager.DataManager;
+import contact.AddressBook;
 
 /**
 * This class manages the details of an Addressbook User.
