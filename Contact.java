@@ -1,6 +1,5 @@
 package contact;
 
-import java.util.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.Period;
@@ -10,7 +9,7 @@ import java.time.Period;
 * @author Jheanel Brown and Esther E
 * @version 1.0
 */
-public class Contact extends Person
+public class Contact extends Person implements Comparable<Contact>
 {
 	private Address resident;
 	private ArrayList<Phone> phones = new ArrayList<Phone>();
@@ -83,6 +82,15 @@ public class Contact extends Person
 	public void updateName(String name)
 	{
 		super.changeLastName(name);
+	}
+	public String getLastName()
+	{
+		return super.getLastName();
+	}
+
+	public String getFirstName()
+	{
+		return super.getFirstName();
 	}
 
 	/**
@@ -209,5 +217,17 @@ public class Contact extends Person
 	public String toString()
 	{
 		return (getEntry() + ", " + getName()+ ", " + super.getGender() + ", " + getAlias()+ "," + getEmailList());
+	}
+
+	public int compareTo(Contact c)
+	{
+		if(getLastName().compareTo(c.getLastName()) == 0)
+		{
+			return getFirstName().compareTo(c.getFirstName());
+		}
+		else
+		{
+			return getLastName().compareTo(c.getLastName());
+		}
 	}
 }
