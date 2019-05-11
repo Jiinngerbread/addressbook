@@ -1,18 +1,14 @@
-package contact.datamanager;
+package contact;
+
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.lang.*;
-import java.nio.file.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 
 
 /**
@@ -24,15 +20,17 @@ public class DataManager
 {
 	private final String ABSOLUTEPATH = "datamanager\\Session\\";
   	private File fileForUser = null;
+  	private AddressBook activeSession;
 
+
+//TODO: Rewrite  constructor to not take file/ create a method to add a file to a path.
   	/**
-  	* This constructor is used to create a file
+  	* This allows for the creation of a file.
   	* @param nameOfFile allows for a file to be created based on the data passed in.
   	*/
-	public DataManager(String nameOfFile)
+	public void createFile(String nameOfFile)
 	{
 		File pathToFile = null;
-
 	    try
 		{
 		    pathToFile = new File(ABSOLUTEPATH);
@@ -48,13 +46,13 @@ public class DataManager
 		       	}
 				else
 				{
-		        	this.fileForUser = createNewFileForUser(userfilepath);
+		        	this.fileForUser = createNewFileForUser(pathForUser);
 		       	}	
 	    	}
 			else
 			{
 		      pathToFile = createPath(ABSOLUTEPATH);
-		      pathForUser = createUserFilePath(specificPath);
+		      pathForUser = createUserFileExt(nameOfFile);
 
 		        if(pathToFile != null)
 				{
@@ -72,18 +70,18 @@ public class DataManager
 		catch (FileNotFoundException noFile)
 		{
 	    	System.out.println("No File exists.");
-	    	error.printStackTrace();
+	    	noFile.printStackTrace();
 	    }
 		catch(IOException e)
 		{
 		    System.out.println("ERROR!");
-		    error.printStackTrace();
+		    e.printStackTrace();
 	  	}
 	}
 
 
 	/**
-	* This method is used by the DataManager constructor to check if a particular file path exists.
+	* This method is used by the contact.DataManager constructor to check if a particular file path exists.
 	* @param obj Represents a file object that will be used to evaluate the if a path exists
 	* @return True if file path exists and false otherwise.
 	**/
@@ -98,11 +96,13 @@ public class DataManager
     * @param path Represents the path where a file will be added.
     * @return Adds a file to the path specified.
     */
-    private File createPath(String path){
+    private File createPath(String path)
+	{
       File fpath = new File (path);
 
-      if(fpath.mkdirs()){
-        return fpaths;
+      if(fpath.mkdirs())
+      {
+        return fpath;
       }
       else
       {
@@ -135,8 +135,8 @@ public class DataManager
 
     /**
     *
-    * @param uFilepath
-    * @return 
+    * @param uFilepath takes in the name of the file path
+    * @return File  creates a file
     **/
     private File createNewFileForUser(String uFilepath) throws IOException{
 
@@ -169,14 +169,14 @@ public class DataManager
 
 	/**
 	* This allows for a User credentials to be verified by checking the User Credentials database for matching data.
-	* @param username Captures the username of the User trying to log into the AddressBook system
-	* @param password Captures the password of the User trying to log into the AddressBook system
+	* @param username Captures the username of the User trying to log into the contact.AddressBook system
+	* @param password Captures the password of the User trying to log into the contact.AddressBook system
 	**/
 	public boolean Authenticate(String username, String password)
 	{
 		try
 		{
-			FileReader fr = new FileReader("UserCredentials.txt");
+			FileReader fr = new FileReader("C:\\Users\\lenovo\\Desktop\\contact\\datamanager\\Session\\UserCredentials.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String oneLine = "";
 			while ((oneLine = br.readLine()) != null)
@@ -188,19 +188,17 @@ public class DataManager
 				String userN = eachLine[0];
 				String passW = eachLine[1];
 
-				if(userN == username && passW == password)
+				if(userN.equals(username) && passW.equals(password))
 				{
 					return true;
 				}
-				else
-				{
-					return false;
-				}
 			}
+			return false;
 		}
 		catch(IOException error)
 		{
 			System.out.println("An error has occured.");
+			return false;
 		}
 	}
 
@@ -219,9 +217,11 @@ public class DataManager
 			fr = new FileWriter(where, true);
 			br = new BufferedWriter(fr);
 
-			br.newLine();
-			br.newLine();
-			br.write(data);
+
+			br.write("\n"+ data);
+			
+			br.close();
+			fr.close();
 		}
 		catch(FileNotFoundException fnfErr)
 		{
@@ -233,8 +233,8 @@ public class DataManager
 			System.out.println("ERROR!");
 			error.printStackTrace();
 		}
-		final
-		{
+
+		/*final{
 			try
 			{
 				br.close();
@@ -244,7 +244,7 @@ public class DataManager
 			{
 				writerError.printStackTrace();
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -256,15 +256,18 @@ public class DataManager
 	{
 		FileWriter fr = null;
 		BufferedWriter br = null;
-		File pathToFile = new File(path);
+		File pathToFile = new File(data);
 		try
 		{
 			fr = new FileWriter(fileForUser, true);
 			br = new BufferedWriter(fr);
 
-			br.newLine();
-			br.newLine();
+			//br.newLine();
+			//br.newLine();
 			br.write(data);
+			
+			br.close();
+			fr.close();
 		}
 		catch(FileNotFoundException fnfErr)
 		{
@@ -276,31 +279,20 @@ public class DataManager
 			System.out.println("ERROR!");
 			error.printStackTrace();
 		}
-		final
-		{
-			try
-			{
-				br.close();
-				fr.close();
-			}
-			catch(IOException writerError)
-			{
-				writerError.printStackTrace();
-			}
-		}
+
 	}
 
 	/**
 	* Method is being used to read a contact file to capture information about all contacts in a given User's Addressbook
 	* @param filename Used to find a given contact's addressbook file
-	* @return Will generate a list of contacts based on the data stored in the AddressBook.
+	* @return Will generate a list of contacts based on the data stored in the contact.AddressBook.
 	**/
-	public ArrayList<Contacts> readContactFile(String filename)
+	public ArrayList readContactFile(String filename)
 	{
 		try
 		{
-			String filename = createUserFileExt(filename)
-			FileReader fr = new FileReader(filename);
+			String fileName = createUserFileExt(filename);
+			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
 
 			String eachLine = "";
@@ -309,7 +301,7 @@ public class DataManager
 			while ((eachLine = br.readLine()) != null)
 			{
 				//slit the line into tokens
-				allInfo = eachLine.split("\"");
+				String[] allInfo = eachLine.split("%");
 
 				//convert initial string split
 				String contactAlias = allInfo[0];
@@ -323,18 +315,21 @@ public class DataManager
 				String[] contactData = contactInfo.split(",");
 				String firstN = contactData[0]; //needs to be string, string, gender, long
 				String lastN = contactData[1];
-				Gender gender = Gender.valueOf(contactData[2]).toUpperCase();
+				String uppercaseGender = contactData[2];
+				Gender gender = Gender.valueOf(uppercaseGender);
 				long dateOB = Long.parseLong(contactData[3]);
 
 				//________________________
 				String[] phoneData = contactPhones.split(";");
-				String[] eachPhone = phoneData.split(",");
-				char pType = eachPhone[0].charAt(0);
-				long pNumber = Long.parseLong(eachPhone[1]);
+				//String[] eachPhone = phoneData.split(",");
+				char pType = phoneData[0].charAt(0);
+				long pNumber = Long.parseLong(phoneData[1]);
 				//________________________
 				String[] emails = contactEmails.split(",");
 				//________________________
+				//Addressbook
 				Contact eachContact = new Contact(firstN, lastN, gender,dateOB);
+				this.activeSession = new AddressBook();
 				eachContact.setAddress(contactAddress);
 				eachContact.setAlias(contactAlias);
 
@@ -342,20 +337,30 @@ public class DataManager
 				for(String each: phoneData)
 				{
 
-					String[] eachPhone = each.split(",");
-					char pType = each[0].charAt(0);
-					long pNumber = Long.parseLong(eachPhone[1]);
-					eachContact.addPhone(pType, pNumber);
+					//String[] singlePhone = phoneData.split(",");
+					String phTypecapture = phoneData[0];
+					Character phType = phTypecapture.charAt(0);
+
+					long phNumber = Long.parseLong(phoneData[1]);
+					eachContact.addPhone(phType, phNumber);
 				}
 
-				for(int i = 0; i< emails.length(); i++ )
+				for(String mail: emails)
 				{
-					eachContact.addEmail(i);
+					eachContact.addEmail(mail);
 				}
 
-				ContactList.add(eachContact);
+				activeSession.getContactList().add(eachContact);
+
+				fr.close();
+				br.close();
 			}
-			return ContactList;
+			return activeSession.getContactList();
+		}
+
+		catch(NullPointerException nul)
+		{
+			return new ArrayList<Contact>();
 		}
 		catch(IOException error)
 		{
@@ -367,21 +372,12 @@ public class DataManager
 		{
 			System.out.println("NOTE: the input has to be a number.");
 		}
-		finally
-		{
-			try
-			{
-				fr.close();
-				br.close();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
+
 		return null;
 	}
 
-
-
+	public void deleteFile()
+	{
+  		fileForUser.deleteOnExit();
+	}
 }
